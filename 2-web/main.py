@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, Response
 import pandas
+import unidecode
 import geopandas
 import sqlite3
 import io
@@ -88,7 +89,9 @@ def consultations_per_1k_by_year_province():
 @app.route("/consultations_age_by_commune")
 def consultations_age_by_commune():
     # consultations per age group, per year, for commune
-    commune = request.args.get('commune', default='Santiago', type=str)
+    original_commune = request.args.get('commune', default='Santiago', type=str)
+    # strip special characters
+    commune = unidecode.unidecode(original_commune)
 
     cursor = database()
     cursor.execute(f"""
@@ -110,7 +113,7 @@ def consultations_age_by_commune():
     # plot data into png
     fig = Figure(figsize=(10, 8))
     ax = fig.add_subplot(111)
-    ax.title.set_text(f"Consultas por edad en {commune}")
+    ax.title.set_text(f"Consultas por edad en {original_commune}")
     ax.axes.set_xlabel("Edad") # type: ignore
     ax.axes.set_ylabel("Consultas") # type: ignore
     data.plot(kind='bar', ax=ax)
@@ -122,7 +125,8 @@ def consultations_age_by_commune():
 @app.route('/consultations_per_month_by_commune_year')
 def consultations_per_month():
     year = request.args.get('year', default=2020, type=int)
-    province = request.args.get('commune', default='Penalolen', type=str)
+    original_commune = request.args.get('commune', default='Santiago', type=str)
+    commune = unidecode.unidecode(original_commune)
 
     months = [
         "Enero",
@@ -148,7 +152,7 @@ def consultations_per_month():
         commune.name like ? and
         report.year = ?
     group by cohort
-    """, (province, year))
+    """, (commune, year))
     data = cursor.fetchall()
 
     data = pandas.DataFrame(data, columns=["cohort", "value"])
@@ -165,7 +169,7 @@ def consultations_per_month():
     # plot data into png
     fig = Figure(figsize=(10, 8))
     ax = fig.add_subplot(111)
-    ax.title.set_text(f"Consultas por mes en Penalolen")
+    ax.title.set_text(f"Consultas por mes en {original_commune}")
     ax.axes.set_xlabel("Mes") # type: ignore
     ax.axes.set_ylabel("Consultas") # type: ignore
     data.plot(kind='bar', ax=ax)
