@@ -1,0 +1,12 @@
+services:
+  mental:
+    build: .
+    image: mental.espi.moe/mental:r0
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../data/db.sqlite3:/db.sqlite3
+      - ./main.py:/main.py
+      - ./templates:/templates
+    command: ["gunicorn", "--bind", ":9000", "main:app"]

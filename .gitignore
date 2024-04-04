@@ -1,0 +1,8 @@
+dist/
+node_modules/
+venv/
+data.json
+.DS_Store
+__pycache__/
+.vscode/
+.idea/
