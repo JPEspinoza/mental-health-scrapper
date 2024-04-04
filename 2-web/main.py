@@ -7,7 +7,8 @@ import io
 from shapely import wkb
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
-from datetime import datetime
+from matplotlib import rcParams
+rcParams.update({'figure.autolayout': True})
 
 app = Flask(__name__)
 
