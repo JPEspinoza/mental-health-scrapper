@@ -1,9 +1,3 @@
-/*
-Corresponde a la Intervención ambulatoria individual o grupal, realizada por un profesional, técnico y/o gestor comunitario. La intervención incluye consejería, evaluación y confirmación diagnóstica, elaboración de plan de cuidados integrales, psicoeducación, acciones de emergencia y desastres, entre otras prestaciones.
-Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describe los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes.
- Fuente: REMA 06
-*/
-
 import { Context } from '../Types';
 import fs from 'fs';
 import DeisResults from '../deis/DeisResults';
@@ -11,10 +5,10 @@ import DeisClient from '../deis/DeisClient';
 import { COMUNAS } from '../Constants';
 
 const PAYLOADS = [
-	'MentalByMonth',
+	'AttendanceByProfessional',
 ];
 
-export default class MentalByGender {
+export default class Professional {
 	public static getRequiredPayloads(): string[] {
 		return PAYLOADS;
 	}
@@ -28,24 +22,23 @@ export default class MentalByGender {
 				{
 					// get all the data from the results
 					console.log(`Writing result for ${payload}-${comuna}-${establishment}`);
-					console.log(results.get(`${payload}-${comuna}-${establishment}`));
 					const results_array = results.get(`${payload}-${comuna}-${establishment}`)['data']['valueList'];
 
-					let month_order;
+					let professional_order;
 
 					try {
-						month_order = results.get(`${payload}-${comuna}-${establishment}`)['stringTable']['valueList'];
+						professional_order = results.get(`${payload}-${comuna}-${establishment}`)['stringTable']['valueList'];
 					}
 					catch(e) {
-						month_order = ['Abril', 'Agosto', 'Diciembre', 'Enero', 'Febrero', 'Julio', 'Junio', 'Marzo', 'Mayo', 'Noviembre', 'Octubre', 'Septiembre'];
+						professional_order = ['Asistente Social','Atenciones','Emergencias y Desastres','Enfermera/o','Intervención Psicosocial Grupal','Matrona/ón','Médico','Otros Profesionales','Psicodiagnóstico Psicólogo/a','Psicólogo/a','Psicoterapia Individual Médico Psiquiatra','Psicoterapia Individual Psicólogo/a','Técnico Paramédico en Salud Mental','Terapeuta Ocupacional'];
 					}
 
 					const result_string  = JSON.stringify({
 						'report': payload,
 						'commune': comuna,
 						'establishment': establishment,
-						'columns': ['month', 'year', 'value'],
-						'month_order': month_order,
+						'columns': ['year', 'emergency', 'professional', 'value'],
+						'professional_order': professional_order,
 						'data': results_array
 					});
 
@@ -56,4 +49,5 @@ export default class MentalByGender {
 			}
 		}
 	}
+
 }

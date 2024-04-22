@@ -8,9 +8,15 @@ from shapely import wkb
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib import rcParams
-rcParams.update({'figure.autolayout': True})
 
 app = Flask(__name__)
+
+if(DEBUG):
+    # reload templates automatically
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+# auto layout for graphs
+rcParams.update({'figure.autolayout': True})
 
 def database() -> sqlite3.Cursor:
     conn = sqlite3.connect("/db.sqlite3")
@@ -194,13 +200,35 @@ def establishment_location():
     establishments = cursor.fetchall()
 
     establishments = pandas.DataFrame(establishments, columns=["name", "lat", "lon", "value"])
-    establishments = geopandas.GeoDataFrame(
+    establishments = geopandas.GeoDataFrame( 
         data=establishments, 
         geometry=geopandas.points_from_xy(
             establishments['lon'],
             establishments['lat'],
             crs="EPSG:4326"
         )
-    )
-    map = establishments.explore()
+    ) # type: ignore
+
+   # get the geometry of all communes in santiago
+    cursor.execute("""
+    SELECT name, geometry
+    FROM commune
+    WHERE province like 'Santiago'
+    """) 
+
+    communes = cursor.fetchall()
+    communes = pandas.DataFrame(communes, columns=["name", "geometry"])
+    communes['geometry'] = communes['geometry'].apply(wkb.loads)
+    communes = geopandas.GeoDataFrame(data=communes, geometry='geometry', crs='EPSG:3857') # type: ignore
+
+    # show the establishments in the map
+    map = communes.explore()
+
+    establishments.explore().add_to(map)
+
+    # map = establishments.explore()
     return map._repr_html_()
+
+# TODO: grafico de torta de profesional por comuna
+# @app.route(''):
+# 

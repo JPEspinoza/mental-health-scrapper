@@ -1,3 +1,4 @@
+// communes in santiago, limited dataset for improved performance
 export const COMUNAS = [
 	{commune: 'Renca', establishments: ['Centro de Salud Familiar Bicentenario', 'Centro de Salud Familiar Dr. Hernán Urzúa Merino', 'Centro de Salud Familiar Huamachuco', 'Centro de Salud Familiar Renca', 'Clínica Dental Móvil Simple. Pat. PW4083 (Curacaví)', 'COSAM Renca', 'SAR Renca']},
 	{commune: 'Pudahuel', establishments: ['Centro Comunitario de Salud Familiar Concejal Guillermo Flores O.', 'Centro Comunitario de Salud Familiar Irene Frei Montalva', 'Centro Comunitario de Salud Familiar Padre Félix Gutiérrez Donoso', 'Centro Comunitario de Salud Familiar Río Claro', 'Centro Comunitario de Salud Mental', 'Centro de Referencia de Salud Salvador Allende', 'Centro de Salud Familiar Cardenal Raúl Silva Henríquez', 'Centro de Salud Familiar Dr. Gustavo Molina', 'Centro de Salud Familiar Pudahuel Estrella', 'Centro de Salud Familiar Pudahuel Poniente', 'Centro de Salud Familiar Violeta Parra', 'Consultorio Coaniquem', 'COSAM Municipal de Pudahuel', 'COSAM Pudahuel']},
@@ -33,6 +34,7 @@ export const COMUNAS = [
 	{commune: 'La Cisterna', establishments: ['Centro Comunitario de Salud Familiar Eduardo Frei Montalva', 'Centro de Salud Familiar Eduardo Frei Montalva', 'Centro de Salud Familiar Santa Anselma']},
 ];
 
+// full dataset
 const a = [
 	{commune: 'Tomé', establishments: ['CECOSF  RAFAEL', 'Centro Comunitario de Salud Familiar Cerro Estanque', 'Centro Comunitario de Salud Familiar El Santo Esfuerzo de Todos', 'Centro Comunitario de Salud Familiar Punta de Parra', 'Centro de Salud Familiar Bellavista', 'Centro de Salud Familiar Dichato', 'Centro de Salud Familiar Dr. Alberto Reyes', 'Hospital de Tomé', 'Posta de Salud Rural Coliumo', 'Posta de Salud Rural Menque', 'Posta de Salud Rural Rafael']},
 	{commune: 'O\'\'Higgins', establishments: ['Posta de Salud Rural Villa O\'\'Higgins']},

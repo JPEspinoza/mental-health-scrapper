@@ -1,9 +1,3 @@
-/*
-Corresponde a la Intervención ambulatoria individual o grupal, realizada por un profesional, técnico y/o gestor comunitario. La intervención incluye consejería, evaluación y confirmación diagnóstica, elaboración de plan de cuidados integrales, psicoeducación, acciones de emergencia y desastres, entre otras prestaciones.
-Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describe los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes.
- Fuente: REMA 06
-*/
-
 import { Context } from '../Types';
 import fs from 'fs';
 import DeisResults from '../deis/DeisResults';
@@ -11,12 +5,14 @@ import DeisClient from '../deis/DeisClient';
 import { COMUNAS } from '../Constants';
 
 const PAYLOADS = [
-	'MentalByAge',
+	// 'AttendanceByGender',
+	// 'ConsultationByGender',
+	'ConsultationSpecialistByGender'
 ];
 
-const COLUMNS = ['year', '0 to 9', '10 to 14', '15 to 19', '20 to 29', '30 to 44', '45 to 59', '60+'];
+const COLUMNS = ['year', 'male', 'female'];
 
-export default class MentalByAge {
+export default class Gender {
 	public static getRequiredPayloads(): string[] {
 		return PAYLOADS;
 	}
@@ -26,7 +22,7 @@ export default class MentalByAge {
 		{
 			for (const commune of COMUNAS) {
 				const comuna = commune.commune;
-				for (const establishment of commune.establishments)
+				for (const establishment of commune.establishments) 
 				{
 					// get all the data from the results
 					console.log(`Writing result for ${payload}-${comuna}-${establishment}`);
@@ -36,7 +32,7 @@ export default class MentalByAge {
 						'report': payload,
 						'commune': comuna,
 						'establishment': establishment,
-						'columns': COLUMNS, 
+						'columns': COLUMNS,
 						'data': results_array
 					});
 

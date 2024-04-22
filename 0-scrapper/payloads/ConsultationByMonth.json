@@ -1,39 +1,35 @@
 {
+    "_comment0": "En este apartado se identifican todas las atenciones realizadas por un médico general, o especialista (APS o Especialidad). Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describen los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes. Fuente: REM A04",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
-    "nextUniqueNameIndex": 35325,
+    "nextUniqueNameIndex": 35563,
     "dataDefinitions": [
         {
             "@element": "ParentDataDefinition",
-            "name": "dd691",
+            "name": "dd19874",
             "businessItems": [
                 {
-                    "name": "bi686",
-                    "base": "bi605",
+                    "name": "bi19879",
+                    "base": "bi23",
                     "@element": "RelationalDataItem"
                 },
                 {
-                    "name": "bi689",
-                    "base": "bi632",
+                    "name": "bi19880",
+                    "base": "bi40",
                     "@element": "RelationalDataItem"
                 },
                 {
-                    "name": "bi1984",
-                    "base": "bi1968",
-                    "@element": "RelationalDataItem"
-                },
-                {
-                    "name": "bi3006",
-                    "base": "bi2994",
+                    "name": "bi19882",
+                    "base": "bi8",
                     "@element": "RelationalDataItem"
                 }
             ],
-            "source": "ds604",
+            "source": "ds7",
             "childQueryRelationshipType": "independent",
             "dataDefinitionList": [
                 {
                     "@element": "DataDefinition",
-                    "name": "dd692",
+                    "name": "dd19875",
                     "type": "multidimensional",
                     "multidimensionalQueryList": [
                         {
@@ -43,16 +39,15 @@
                                     "@element": "Query_Axis",
                                     "type": "column",
                                     "itemList": [
-                                        "bi686",
-                                        "bi1984",
-                                        "bi3006"
+                                        "bi19879",
+                                        "bi19882"
                                     ]
                                 },
                                 {
                                     "@element": "Query_Axis",
                                     "type": "row",
                                     "itemList": [
-                                        "bi689"
+                                        "bi19880"
                                     ]
                                 }
                             ],
@@ -61,80 +56,77 @@
                                 {
                                     "sortDirection": "ascending",
                                     "@element": "SortItem",
-                                    "reference": "bi1984"
+                                    "reference": "bi19879"
                                 },
                                 {
                                     "sortDirection": "ascending",
                                     "@element": "SortItem",
-                                    "reference": "bi686"
-                                },
-                                {
-                                    "sortDirection": "ascending",
-                                    "@element": "SortItem",
-                                    "reference": "bi3006"
+                                    "reference": "bi19882"
                                 }
                             ]
                         }
                     ],
-                    "source": "ds604",
+                    "source": "ds7",
                     "resultDefinitions": [
                         {
                             "@element": "ResultDefinition",
-                            "name": "dd687",
+                            "name": "dd19876",
                             "purpose": "primary",
                             "maxRowsBehavior": "truncate",
                             "maxRowsLookup": "graphDefault"
                         }
                     ]
                 }
-            ],
-            "appliedFilters": {
-                "@element": "AppliedFilters"
-            }
+            ]
         }
     ],
     "dataSources": [
         {
             "@element": "DataSource",
-            "name": "ds604",
-            "label": "REM_ATENCIONSM",
+            "name": "ds7",
+            "label": "REM_MEDICOSM",
             "type": "relational",
             "casResource": {
                 "@element": "CasResource",
                 "server": "cas-shared-default",
                 "library": "Public",
-                "table": "REM_ATENCIONSM",
+                "table": "REM_MEDICOSM",
                 "locale": "es_419"
             },
             "businessItemFolder": {
                 "@element": "BusinessItemFolder",
                 "items": [
                     {
-                        "name": "bi605",
+                        "name": "bi23",
+                        "label": "Mes",
+                        "sortOn": "custom",
+                        "xref": "mes_nombre",
+                        "customSort": "cs167",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi40",
+                        "label": "Frecuencia",
+                        "usage": "quantitative",
+                        "format": "COMMA12.",
+                        "@element": "DataSource_PredefinedDataItem",
+                        "calculation": "totalCount"
+                    },
+                    {
+                        "name": "bi8",
                         "label": "Año",
                         "usage": "categorical",
                         "xref": "Ano",
                         "@element": "DataItem"
                     },
                     {
-                        "name": "bi632",
-                        "format": "COMMA12.",
-                        "xref": "Total_Ambos_sexos",
+                        "name": "bi10",
+                        "label": "Comuna",
+                        "xref": "COMUNA",
                         "@element": "DataItem"
                     },
                     {
-                        "name": "bi1968",
-                        "xref": "Tipo",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi2994",
-                        "label": "Profesional",
-                        "xref": "Prestación2",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi628",
+                        "name": "bi33",
                         "label": "Establecimiento",
                         "xref": "Nombre Oficial",
                         "@element": "DataItem"
@@ -3647,6 +3639,53 @@
                     "value": " Magallanes y  La Antártica Chilena"
                 }
             ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs35461",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Niños/as con Control a los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT realizado con alteración del area de lenguaje y/o Social en el control de los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT alterado y  con alteración del area de lenguaje y/o Social en el control"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Alto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo Alto con derivación a especialista"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo medio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Bajo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Requiere derivación"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Riesgo Medio en 1° parte"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-No requiere derivación"
+                }
+            ]
         }
     ],
     "sasReportState": {
@@ -3656,19 +3695,19 @@
             "queryRequests": [
                 {
                     "@element": "queryRequest",
-                    "data": "dd691",
+                    "data": "dd19874",
                     "dataLevel": "custom",
                     "expressions": [
                         {
                             "@element": "expression",
                             "type": "filter",
                             "dataStage": "detail",
-                            "containedValue": "eq(${bi628},'{1}')"
+                            "containedValue": "eq(${bi33},'{1}')"
                         }
                     ]
                 }
             ]
         },
-        "date": "2024-04-03T19:56:40.543Z"
+        "date": "2024-04-22T06:17:44.263Z"
     }
 }

@@ -1,50 +1,26 @@
 {
+    "_comment0": "Corresponde a la Intervención ambulatoria individual o grupal, realizada por un profesional, técnico y/o gestor comunitario. La intervención incluye consejería, evaluación y confirmación diagnóstica, elaboración de plan de cuidados integrales, psicoeducación, acciones de emergencia y desastres, entre otras prestaciones. Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describe los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes. Fuente: REMA 06",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35325,
     "dataDefinitions": [
         {
             "@element": "ParentDataDefinition",
-            "name": "dd373",
+            "name": "dd3670",
             "businessItems": [
                 {
-                    "name": "bi637",
+                    "name": "bi3576",
+                    "base": "bi632",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3675",
+                    "base": "bi619",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3676",
                     "base": "bi605",
-                    "@element": "RelationalDataItem"
-                },
-                {
-                    "name": "bi684",
-                    "base": "bi629",
-                    "@element": "RelationalDataItem"
-                },
-                {
-                    "name": "bi685",
-                    "expression": {
-                        "@element": "Expression",
-                        "value": "or(in(${bi684,binned},'Atención Asistente Social','Atención Enfermera/o','Atención Enfermera/o(ED)','Atención Gestor Comunitario(ED)','Atención Gestor/a Comunitario','Atención Intervención Psicosocial Grupal','Atención Matrona/ón','Atención Médico','Atención Otros Profesionales','Atención Psicodiagnóstico Psicólogo/a','Atención Psicólogo/a','Atención Psicólogo/a(ED)','Atención Psicoterapia Individual Médico Psiquiatra','Atención Psicoterapia Individual Psicólogo/a','Atencion Técnico Paramédico en Salud Mental','Atención Técnico Paramédico y En Salud Mental(ED)','Atención Técnico Rehabilitación Alcohol Y Drogas','Atención Terapeuta Ocupacional'),ismissing(${bi684,binned}))"
-                    },
-                    "editorProperties": [
-                        {
-                            "@element": "Editor_Property",
-                            "key": "complexity",
-                            "value": "SINGLE_DATA_ITEM"
-                        },
-                        {
-                            "@element": "Editor_Property",
-                            "key": "interactiveEditingAllowed",
-                            "value": "TRUE"
-                        }
-                    ],
-                    "@element": "RelationalFilterItem"
-                },
-                {
-                    "name": "bi3000",
-                    "base": "bi634",
-                    "@element": "RelationalDataItem"
-                },
-                {
-                    "name": "bi3001",
-                    "base": "bi633",
                     "@element": "RelationalDataItem"
                 }
             ],
@@ -53,7 +29,7 @@
             "dataDefinitionList": [
                 {
                     "@element": "DataDefinition",
-                    "name": "dd374",
+                    "name": "dd3671",
                     "type": "multidimensional",
                     "multidimensionalQueryList": [
                         {
@@ -63,15 +39,15 @@
                                     "@element": "Query_Axis",
                                     "type": "column",
                                     "itemList": [
-                                        "bi637"
+                                        "bi3675",
+                                        "bi3676"
                                     ]
                                 },
                                 {
                                     "@element": "Query_Axis",
                                     "type": "row",
                                     "itemList": [
-                                        "bi3000",
-                                        "bi3001"
+                                        "bi3576"
                                     ]
                                 }
                             ],
@@ -80,7 +56,12 @@
                                 {
                                     "sortDirection": "ascending",
                                     "@element": "SortItem",
-                                    "reference": "bi637"
+                                    "reference": "bi3675"
+                                },
+                                {
+                                    "sortDirection": "ascending",
+                                    "@element": "SortItem",
+                                    "reference": "bi3676"
                                 }
                             ]
                         }
@@ -89,20 +70,14 @@
                     "resultDefinitions": [
                         {
                             "@element": "ResultDefinition",
-                            "name": "dd371",
+                            "name": "dd3672",
                             "purpose": "primary",
                             "maxRowsBehavior": "truncate",
                             "maxRowsLookup": "graphDefault"
                         }
                     ]
                 }
-            ],
-            "appliedFilters": {
-                "@element": "AppliedFilters",
-                "detailFilters": [
-                    "bi685"
-                ]
-            }
+            ]
         }
     ],
     "dataSources": [
@@ -122,29 +97,24 @@
                 "@element": "BusinessItemFolder",
                 "items": [
                     {
+                        "name": "bi632",
+                        "format": "COMMA12.",
+                        "xref": "Total_Ambos_sexos",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi619",
+                        "label": "Mes",
+                        "sortOn": "custom",
+                        "xref": "mes_nombre",
+                        "customSort": "cs672",
+                        "@element": "DataItem"
+                    },
+                    {
                         "name": "bi605",
                         "label": "Año",
                         "usage": "categorical",
                         "xref": "Ano",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi629",
-                        "xref": "Prestación",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi634",
-                        "label": "Mujeres",
-                        "format": "COMMA12.",
-                        "xref": "Total_Mujeres",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi633",
-                        "label": "Hombres",
-                        "format": "COMMA12.",
-                        "xref": "Total_Hombres",
                         "@element": "DataItem"
                     },
                     {
@@ -3670,7 +3640,7 @@
             "queryRequests": [
                 {
                     "@element": "queryRequest",
-                    "data": "dd373",
+                    "data": "dd3670",
                     "dataLevel": "custom",
                     "expressions": [
                         {
@@ -3683,6 +3653,6 @@
                 }
             ]
         },
-        "date": "2024-03-11T18:15:54.720Z"
+        "date": "2024-04-03T19:56:40.545Z"
     }
 }

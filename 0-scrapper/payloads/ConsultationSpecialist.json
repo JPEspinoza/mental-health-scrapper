@@ -1,34 +1,35 @@
 {
+    "_comment0": "En este apartado se identifican todas las atenciones realizadas por un médico general, o especialista  en el nivel de Especialidad. Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describen los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes. Fuente: REM A07",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
-    "nextUniqueNameIndex": 35325,
+    "nextUniqueNameIndex": 35563,
     "dataDefinitions": [
         {
             "@element": "ParentDataDefinition",
-            "name": "dd3670",
+            "name": "dd218",
             "businessItems": [
                 {
-                    "name": "bi3576",
-                    "base": "bi632",
+                    "name": "bi321",
+                    "base": "bi198",
                     "@element": "RelationalDataItem"
                 },
                 {
-                    "name": "bi3675",
-                    "base": "bi619",
+                    "name": "bi3007",
+                    "base": "bi2991",
                     "@element": "RelationalDataItem"
                 },
                 {
-                    "name": "bi3676",
-                    "base": "bi605",
+                    "name": "bi30494",
+                    "base": "bi210",
                     "@element": "RelationalDataItem"
                 }
             ],
-            "source": "ds604",
+            "source": "ds190",
             "childQueryRelationshipType": "independent",
             "dataDefinitionList": [
                 {
                     "@element": "DataDefinition",
-                    "name": "dd3671",
+                    "name": "dd219",
                     "type": "multidimensional",
                     "multidimensionalQueryList": [
                         {
@@ -38,15 +39,15 @@
                                     "@element": "Query_Axis",
                                     "type": "column",
                                     "itemList": [
-                                        "bi3675",
-                                        "bi3676"
+                                        "bi321",
+                                        "bi3007"
                                     ]
                                 },
                                 {
                                     "@element": "Query_Axis",
                                     "type": "row",
                                     "itemList": [
-                                        "bi3576"
+                                        "bi30494"
                                     ]
                                 }
                             ],
@@ -55,21 +56,21 @@
                                 {
                                     "sortDirection": "ascending",
                                     "@element": "SortItem",
-                                    "reference": "bi3675"
+                                    "reference": "bi321"
                                 },
                                 {
                                     "sortDirection": "ascending",
                                     "@element": "SortItem",
-                                    "reference": "bi3676"
+                                    "reference": "bi3007"
                                 }
                             ]
                         }
                     ],
-                    "source": "ds604",
+                    "source": "ds190",
                     "resultDefinitions": [
                         {
                             "@element": "ResultDefinition",
-                            "name": "dd3672",
+                            "name": "dd216",
                             "purpose": "primary",
                             "maxRowsBehavior": "truncate",
                             "maxRowsLookup": "graphDefault"
@@ -82,42 +83,47 @@
     "dataSources": [
         {
             "@element": "DataSource",
-            "name": "ds604",
-            "label": "REM_ATENCIONSM",
+            "name": "ds190",
+            "label": "REM_ESPECIALIDADSM",
             "type": "relational",
             "casResource": {
                 "@element": "CasResource",
                 "server": "cas-shared-default",
                 "library": "Public",
-                "table": "REM_ATENCIONSM",
+                "table": "REM_ESPECIALIDADSM",
                 "locale": "es_419"
             },
             "businessItemFolder": {
                 "@element": "BusinessItemFolder",
                 "items": [
                     {
-                        "name": "bi632",
-                        "format": "COMMA12.",
-                        "xref": "Total_Ambos_sexos",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi619",
-                        "label": "Mes",
-                        "sortOn": "custom",
-                        "xref": "mes_nombre",
-                        "customSort": "cs672",
-                        "@element": "DataItem"
-                    },
-                    {
-                        "name": "bi605",
+                        "name": "bi198",
                         "label": "Año",
                         "usage": "categorical",
                         "xref": "Ano",
                         "@element": "DataItem"
                     },
                     {
-                        "name": "bi628",
+                        "name": "bi2991",
+                        "label": "Especialidad",
+                        "xref": "Prestación2",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi210",
+                        "label": "Total Ambos sexos",
+                        "format": "COMMA12.",
+                        "xref": "Total_Ambos_sexos",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi200",
+                        "label": "Comuna",
+                        "xref": "COMUNA",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi206",
                         "label": "Establecimiento",
                         "xref": "Nombre Oficial",
                         "@element": "DataItem"
@@ -3630,6 +3636,53 @@
                     "value": " Magallanes y  La Antártica Chilena"
                 }
             ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs35461",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Niños/as con Control a los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT realizado con alteración del area de lenguaje y/o Social en el control de los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT alterado y  con alteración del area de lenguaje y/o Social en el control"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Alto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo Alto con derivación a especialista"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo medio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Bajo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Requiere derivación"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Riesgo Medio en 1° parte"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-No requiere derivación"
+                }
+            ]
         }
     ],
     "sasReportState": {
@@ -3639,19 +3692,19 @@
             "queryRequests": [
                 {
                     "@element": "queryRequest",
-                    "data": "dd3670",
+                    "data": "dd218",
                     "dataLevel": "custom",
                     "expressions": [
                         {
                             "@element": "expression",
                             "type": "filter",
                             "dataStage": "detail",
-                            "containedValue": "eq(${bi628},'{1}')"
+                            "containedValue": "eq(${bi206},'{1}')"
                         }
                     ]
                 }
             ]
         },
-        "date": "2024-04-03T19:56:40.545Z"
+        "date": "2024-04-22T07:12:56.117Z"
     }
 }
