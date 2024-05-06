@@ -8,23 +8,13 @@ import DeisResults from '../deis/DeisResults';
 import DeisClient from '../deis/DeisClient';
 
 // import writers
-import Gender from './Gender';
-import Age from './Age';
-import Month from './Month';
-import Specialist from './Specialist';
-import Professional from './Professional';
-import SpecialGroup from './SpecialGroup';
-import EstablishmentsByCommune from './EstablishmentByCommune'; // brings the establishments in each commune, only used for generating the Constants.ts file
+import Edimburg from './Edimburg';
+// import EstablishmentsByCommune from './EstablishmentByCommune'; // brings the establishments in each commune, only used for generating the Constants.ts file
 
 const logger = Logger.get('Writers');
 
 const WRITERS: Writer[] = [
-	Gender,
-	Age,
-	Month,
-	Specialist,
-	// Professional,
-	// SpecialGroup
+	Edimburg,
 	// EstablishmentsByCommune // brings the establishments in each commune, only used for generating the Constants.ts file
 ];
 

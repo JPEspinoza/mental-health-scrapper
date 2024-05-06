@@ -38,3 +38,9 @@ To scrape additional reports the following components must be implemented:
     ![](documentation/3.png)
 6. Once you identify the network request for your desired graph, copy the payload of the request to the `payloads` folder in this project
     ![](documentation/4.png)
+
+## Currently scrapped reports
+- reporteria salud mental
+    - Atenciones salud mental 
+    - Consultas medicas
+    - Consultas medicas de especialidad
