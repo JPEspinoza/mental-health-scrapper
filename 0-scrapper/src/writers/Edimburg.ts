@@ -112,12 +112,51 @@ const PAYLOADS: Payload = {
 		Corresponden a los registros de todas aquellas actividades implementadas, tanto de atención Primaria como Secundaria, ante la eventualidad de una emergencia Sanitaria, que impida realizar las atenciones de forma presencial en los Centros de Salud, obligando a incluir modalidades remotas de atención.
 		Fuente: REM F (2020), REM A32 (2021)
 	*/
+	'CovidByProfessional': 'Controles Remotos de salud Mental por profesional',
+	'CovidKind': 'Atenciones remotas de salud Mental en contexto de pandemia',
+	'CovidByMonth': 'Atenciones Remotas Salud Mental por mes y año',
 
 	// Intervenciones por patron de consumo
+	/*
+		La intervención individual por patrón de consumo se realiza a las personas que son detectadas con riesgo o problema de consumo de alcohol y otras sustancias. 
+		El riesgo se clasifica en Bajo, Intermedio o Alto. 
+		La detección del nivel de riesgo se descubre mediante la aplicación de instrumentos (AUDIT, ASSIST, CRAFFT) que realiza el profesional en cualquier atención de salud.
+	*/
+	'SubstanceByGender': 'Total de Interveniones por año según sexo',
+	'SubstanceByAge': 'Número de Participantes por grupo de edad',
+	'SubstanceByKind': 'Distribución porcentual de intervenciones por Año y Tipo de taller',
 
 	// Poblacion en control
+	/*
+		Población en Control APS y Especialidad
+		Corresponde a las personas que están en control en el nivel Primario y Secundario con Médico u otro Profesional, 
+		por factores de riesgo y condicionantes de Salud Mental y/o por Diagnósticos de Trastornos Mentales.
+		Se considera población bajo control a todas las personas citadas para estos profesionales, hasta un plazo máximo
+		de inasistencia de 45 días, a la fecha del corte (Corte Junio y Diciembre) 
+		Fuente: REM P06
+	*/
+	// Caveat: It has an extra filter for month?? currently set to december
+	'PopulationControlByGender': 'Número de Personas en Control Programa de Salud Mental según sexo',
+	'PopulationControlByAge': 'Número de Personas en Control Programa de Salud Mental por grupo de edad',
+	'PopulationControlBySpecialGroup': 'Número de  personas en control pertenecientes a grupos de especial protección.',
 
 	// Poblacion en control - diagnosticos
+	/*
+		Población en Control APS y Especialidad
+		Corresponde a las personas que están en control en el nivel Primario y Secundario con Médico u otro Profesional, por factores 
+		de riesgo y condicionantes de Salud Mental y/o por Diagnósticos de Trastornos Mentales.
+		Se considera población bajo control a todas las personas citadas para estos profesionales, hasta un plazo máximo de inasistencia de 45 días, a la fecha del corte (Corte Junio y Diciembre) 
+
+		Nota:  Esta sección considera  la distribución de la población en control con diagnósticos de salud mental y/o Factores condicionantes de la salud mental, 
+		sin embargo, es necesario considerar que una persona en control puede presentar una o más condiciones y diagnósticos, por lo que se sugiere  filtar por Diagnóstico o condición.
+	*/
+	// Caveat: It has an extra filter for month?? currently set to december
+	'PopulationDiagnosticByAge': 'Personas en control  por diagnóstico por grupo de edad y año',
+	'PopulationDiagnosticMood': 'Personas en control del Programa de Salud Mental con diagnóstico de Trastornos del Humor (afectivos)',
+	'PopulationDiagnosticAnxiety': 'Personas en control del Programa de Salud Mental con diagnóstico de Trastornos Ansiosos',
+	'PopulationDiagnosticDementia': 'Personas en control del Programa de Salud Mental con diagnóstico de Demencias',
+	'PopulationDiagnosticSubstance': 'Personas en control del Programa de Salud Mental - Consumo',
+	'PopulationDiagnosticDevelopment': 'Personas en control del Programa de Salud Mental - Trastornos Generalizados del Desarrollo',
 
 	// Atenciones de urgencia
 

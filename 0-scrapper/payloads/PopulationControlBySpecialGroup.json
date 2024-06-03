@@ -1,87 +1,188 @@
 {
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
-    "nextUniqueNameIndex": 35325,
+    "nextUniqueNameIndex": 35705,
     "dataDefinitions": [
         {
             "@element": "ParentDataDefinition",
-            "name": "dd18167",
+            "name": "dd1608",
             "businessItems": [
                 {
-                    "name": "bi18172",
-                    "base": "bi628",
+                    "name": "bi1605",
+                    "base": "bi1436",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi1604",
+                    "base": "bi1439",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi1607",
+                    "expression": {
+                        "@element": "Expression",
+                        "value": "or(in(${bi1604,binned},'POBLACIÓN EN CONTROL AL CORTE'),ismissing(${bi1604,binned}))"
+                    },
+                    "editorProperties": [
+                        {
+                            "@element": "Editor_Property",
+                            "key": "complexity",
+                            "value": "SINGLE_DATA_ITEM"
+                        },
+                        {
+                            "@element": "Editor_Property",
+                            "key": "interactiveEditingAllowed",
+                            "value": "TRUE"
+                        }
+                    ],
+                    "@element": "RelationalFilterItem"
+                },
+                {
+                    "name": "bi1622",
+                    "base": "bi1464",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi1623",
+                    "base": "bi1452",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi27021",
+                    "base": "bi1460",
                     "@element": "RelationalDataItem"
                 }
             ],
-            "source": "ds604",
+            "source": "ds1432",
             "childQueryRelationshipType": "independent",
             "dataDefinitionList": [
                 {
                     "@element": "DataDefinition",
-                    "name": "dd18168",
-                    "type": "relational",
-                    "relationalQueryList": [
+                    "name": "dd1609",
+                    "type": "multidimensional",
+                    "multidimensionalQueryList": [
                         {
-                            "sortItems": [
-                                {
-                                    "sortDirection": "ascending",
-                                    "@element": "SortItem",
-                                    "reference": "bi18172"
-                                }
-                            ],
                             "detail": false,
                             "axes": [
                                 {
                                     "@element": "Query_Axis",
                                     "type": "column",
                                     "itemList": [
-                                        "bi18172"
+                                        "bi1605",
+                                        "bi1604"
+                                    ]
+                                },
+                                {
+                                    "@element": "Query_Axis",
+                                    "type": "row",
+                                    "itemList": [
+                                        "bi1622",
+                                        "bi1623",
+                                        "bi27021"
                                     ]
                                 }
                             ],
-                            "@element": "RelationalQuery"
+                            "@element": "MultidimensionalQuery",
+                            "columnSortItems": [
+                                {
+                                    "sortDirection": "ascending",
+                                    "@element": "SortItem",
+                                    "reference": "bi1604"
+                                },
+                                {
+                                    "sortDirection": "ascending",
+                                    "@element": "SortItem",
+                                    "reference": "bi1605"
+                                }
+                            ]
                         }
                     ],
-                    "source": "ds604",
+                    "source": "ds1432",
                     "resultDefinitions": [
                         {
                             "@element": "ResultDefinition",
-                            "name": "dd18165",
+                            "name": "dd1603",
                             "purpose": "primary",
                             "maxRowsBehavior": "truncate",
-                            "maxRowsLookup": "dropdown"
+                            "maxRowsLookup": "graphDefault"
                         }
                     ]
                 }
-            ]
+            ],
+            "appliedFilters": {
+                "@element": "AppliedFilters",
+                "detailFilters": [
+                    "bi1607"
+                ]
+            }
         }
     ],
     "dataSources": [
         {
             "@element": "DataSource",
-            "name": "ds604",
-            "label": "REM_ATENCIONSM",
+            "name": "ds1432",
+            "label": "SERIEP_FINAL",
             "type": "relational",
             "casResource": {
                 "@element": "CasResource",
                 "server": "cas-shared-default",
                 "library": "Public",
-                "table": "REM_ATENCIONSM",
+                "table": "SERIEP_FINAL",
                 "locale": "es_419"
             },
             "businessItemFolder": {
                 "@element": "BusinessItemFolder",
                 "items": [
                     {
-                        "name": "bi628",
-                        "label": "Establecimiento",
-                        "xref": "Nombre Oficial",
+                        "name": "bi1436",
+                        "label": "Año",
+                        "usage": "categorical",
+                        "xref": "Ano",
                         "@element": "DataItem"
                     },
                     {
-                        "name": "bi607",
+                        "name": "bi1439",
+                        "xref": "Concepto",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi1464",
+                        "label": "Pueblos originarios",
+                        "format": "COMMA12.",
+                        "xref": "Pueblos_originarios",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi1452",
+                        "format": "COMMA12.",
+                        "xref": "Migrantes",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi1460",
+                        "label": "NNAJ SENAME/MN",
+                        "format": "COMMA12.",
+                        "xref": "NNAJ_SENAME",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi1451",
+                        "label": "Mes",
+                        "sortOn": "custom",
+                        "xref": "mes_nombre",
+                        "customSort": "cs1652",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi1438",
                         "label": "Comuna",
                         "xref": "COMUNA",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi1462",
+                        "label": "Establecimiento",
+                        "xref": "Nombre Oficial",
                         "@element": "DataItem"
                     }
                 ]
@@ -3592,6 +3693,53 @@
                     "value": " Magallanes y  La Antártica Chilena"
                 }
             ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs35461",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Niños/as con Control a los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT realizado con alteración del area de lenguaje y/o Social en el control de los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT alterado y  con alteración del area de lenguaje y/o Social en el control"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Alto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo Alto con derivación a especialista"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo medio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Bajo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Requiere derivación"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Riesgo Medio en 1° parte"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-No requiere derivación"
+                }
+            ]
         }
     ],
     "sasReportState": {
@@ -3601,19 +3749,25 @@
             "queryRequests": [
                 {
                     "@element": "queryRequest",
-                    "data": "dd18167",
+                    "data": "dd1608",
                     "dataLevel": "custom",
                     "expressions": [
                         {
                             "@element": "expression",
                             "type": "filter",
                             "dataStage": "detail",
-                            "containedValue": "eq(${bi607},'{0}')"
+                            "containedValue": "eq(${bi1451},'Diciembre')"
+                        },
+                        {
+                            "@element": "expression",
+                            "type": "filter",
+                            "dataStage": "detail",
+                            "containedValue": "eq(${bi1462},'{1}')"
                         }
                     ]
                 }
             ]
         },
-        "date": "2024-04-03T01:47:21.046Z"
+        "date": "2024-06-03T06:20:31.780Z"
     }
 }
