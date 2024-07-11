@@ -6,4 +6,4 @@ data.json
 __pycache__/
 .vscode/
 .idea/
-0-scrapper/data/
+responses/
