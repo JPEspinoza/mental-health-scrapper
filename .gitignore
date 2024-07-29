@@ -8,3 +8,6 @@ __pycache__/
 .idea/
 responses/
 responses2/
+temp.json
+db.sqlite3
+log
