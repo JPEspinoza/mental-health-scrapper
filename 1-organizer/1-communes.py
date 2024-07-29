@@ -25,7 +25,7 @@ conn = sqlite3.connect("../data/db.sqlite3")
 cursor = conn.cursor()
 
 # wipe db
-cursor.execute('DELETE FROM report')
+cursor.execute('DELETE FROM data')
 cursor.execute('DELETE FROM establishment')
 cursor.execute('DELETE FROM commune')
 

@@ -12,13 +12,12 @@ conn = sqlite3.connect("../data/db.sqlite3")
 cursor = conn.cursor()
 
 # wipe db
-cursor.execute('DELETE FROM report')
+cursor.execute('DELETE FROM data')
 cursor.execute('DELETE FROM establishment')
 
 # load the file with the addresses
 addresses = pd.read_csv('../data/establishments/establishments.csv', sep=';', index_col=0)
 addresses = addresses[["Nombre Oficial", "Dirección", "Número", "Nombre Comuna", "Nombre Región", "LATITUD      [Grados decimales]", "LONGITUD [Grados decimales]"]]
-addresses.dropna(inplace=True)
 
 # clean 
 addresses["Nombre Oficial"] = addresses["Nombre Oficial"].apply(clean_string)
@@ -31,7 +30,7 @@ addresses['LONGITUD [Grados decimales]'] = addresses['LONGITUD [Grados decimales
 # insert 
 for address in addresses.iterrows():
     name = address[1]['Nombre Oficial']
-    street = address[1]['Dirección'] + ', ' + address[1]['Número'] + ', ' + address[1]['Nombre Región']
+    street = f"{address[1]['Dirección']}, {address[1]['Número']}, {address[1]['Nombre Región']}"
     latitude = address[1]['LATITUD      [Grados decimales]']
     longitude = address[1]['LONGITUD [Grados decimales]']
 

@@ -1,57 +1,12 @@
 """
 inserts the data into the database
-main: schema
-    + tables
-        commune: table
-            + columns
-                id: integer NN
-                name: TEXT NN
-                geometry: BLOB NN
-                region: TEXT NN
-                province: TEXT NN
-                population: TEXT NN
-            + keys
-                commune_pk: PK (id)
-        establishment: table
-            + columns
-                id: integer NN
-                name: text NN
-                address: text NN
-                lat: REAL
-                lon: real
-                commune_id: integer NN
-            + keys
-                establishment_pk: PK (id)
-            + foreign-keys
-                establishment_commune_id_fk: foreign key (commune_id) -> commune[.commune_pk] (id)
-        report: table
-            + columns
-                id: integer NN
-                name: text NN
-                description: text NN
-            + keys
-                report_pk: PK (id)
-        data: table
-            + columns
-                id: integer NN
-                report_id: integer NN
-                year: integer NN
-                cohort: text NN
-                value: integer NN
-                commune_id: integer NN
-                establishment_id: integer
-                establishment: text NN
-            + keys
-                data_pk: PK (id)
-            + foreign-keys
-                data_commune_id_fk: foreign key (commune_id) -> commune[.commune_pk] (id)
-                data_establishment_id_fk: foreign key (establishment_id) -> establishment[.establishment_pk] (id)
+
 """
 
 import sqlite3
 
 # connect to the database
-conn = sqlite3.connect("main.db")
+conn = sqlite3.connect("../data/db.sqlite3")
 cursor = conn.cursor()
 
 # create the database
@@ -82,7 +37,7 @@ cursor.execute("""
     CREATE TABLE IF NOT EXISTS report (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
-        description TEXT NOT NULL
+        description TEXT
     )
 """)
 
