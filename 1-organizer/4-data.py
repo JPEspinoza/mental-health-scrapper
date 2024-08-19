@@ -12,7 +12,25 @@ pd.set_option('future.no_silent_downcasting', True)
 # turn numpy int64 into int64 so that sqlite doesn't think its getting binary data
 sqlite3.register_adapter(np.int64, int)
 
-files = glob("../0-scrapper/responses/*.json")
+STRING_TABLE_INDEX = [
+    "Controles remotos",
+    "Glosa",
+    "Diagnóstico/Factor de riesgo",
+    "Diagnóstico/ Factor de riesgo",
+    "Diagnóstico/Factor de Riesgo",
+    "Tipo de taller",
+    "Especialidad",
+    "Mes",
+    "Concepto",
+    "Tipo",
+    "Profesional",
+    "Prestación",
+    "Sustancia",
+]
+
+# all
+files = glob("../0-scrapper/responses/Estación Central-Centro de Salud Familiar Las Mercedes*.json")
+# files = glob("../0-scrapper/responses/Estación Central-Centro de Salud Familiar Las Mercedes-CovidKind.json")
 
 # open sqlite database
 conn = sqlite3.connect("../data/db.sqlite3")
@@ -23,7 +41,6 @@ cursor.execute('DELETE FROM data')
 # counters
 success = 0
 no_data = 0
-no_year = 0
 no_establishment = 0
 
 # load each file 
@@ -42,6 +59,7 @@ for path in files:
             data = response["results"][0]["data"]["valueList"]
         except:
             print("No data found")
+            print(response)
             print(path)
             no_data += 1
             continue
@@ -62,13 +80,9 @@ for path in files:
         data.rename(columns={"Año": "year"}, inplace=True, errors="ignore")
         data.rename(columns={"Ano": "year"}, inplace=True, errors="ignore")
 
-        # check if there is year column
-        if "year" not in data.columns:
-            print("No year column found")
-            print(path)
-            print(response)
-            no_year += 1
-            continue
+        # replace ~N with 0
+        data.replace("~N", 0, inplace=True)
+        data.replace(".", 0, inplace=True)
 
         # extract metadata from path
         # example: "Castro-Posta de Salud Rural Pid - Pid-AttendanceByAge.json"
@@ -106,64 +120,38 @@ for path in files:
             no_establishment += 1
             pass
 
+        # get subset of STRING_TABLE_INDEX that are in the data
+        # this has the list of columns that index the data
+        index = list(set(STRING_TABLE_INDEX) & set(data.columns))
+
         # for reports with stringTables
         # this reports have a column with indexes that map to a stringTable
         # we need to map the indexes to the stringTable
         try:
             stringTable = response["results"][0]["stringTable"]["valueList"]
+
+            # map indexes to stringTable
+            data[index] = data[index].map(lambda x: stringTable[x])
         except:
-            stringTable = None
             pass
 
-        if stringTable:
-            value = None
-            if("Concepto" in data.columns):
-                column = "Concepto"
-            elif("ConsultationSpecialistByAge.json" in path):
-                column = "Especialidad"
-            elif("Profesional" in data.columns): 
-                column = "Profesional"
-                value = "Total_Ambos_sexos"
-            elif("Diagnóstico/Factor de riesgo" in data.columns):
-                column = "Diagnóstico/Factor de riesgo"
-                value = "N"
-            elif("Mes" in data.columns):
-                column = "Mes"
-                value = "Frecuencia"
-            elif("Diagnóstico/Factor de Riesgo" in data.columns):
-                column = "Diagnóstico/Factor de Riesgo"
-                value = "Total"
-            elif("Tipo de taller" in data.columns):
-                column = "Tipo de taller"
-                value = "Número de intervenciones"
-            elif("Especialidad" in data.columns):
-                column = "Especialidad"
-                value = "Total Ambos sexos"
-            else:
-                print("Unknown pivot!")
-                print(path)
-                print(data)
-                print(stringTable)
-                exit()
-
-            data[column] = data[column].map(lambda x: stringTable[x]) # type: ignore
-
-            print(column)
-            # rename value column
-            data.rename(columns={value: "value"}, inplace=True, errors="ignore")
-
-            # rename cohort
-            data.rename(columns={column: "cohort"}, inplace=True, errors="ignore")
-
-            # fill data
-            data.replace("~N", 0, inplace=True)
-
-            if(value == None):
-                data = pd.melt(data, id_vars=["year", "cohort"], value_name="value")
-                data["cohort"] = data["cohort"] + " - " + data["variable"]
-                data.drop(columns=["variable"], inplace=True)
+        if("year" in data.columns):
+            index_with_year = index + ["year"]
         else:
-            data = pd.melt(data, id_vars=["year"], var_name="cohort", value_name="value")
+            index_with_year = index
+
+        # melt dataframe for easy insertion
+        data = pd.melt(data, id_vars=index_with_year, var_name="cohort", value_name="value")
+        # fuse index columns
+        data["cohort"] = data[index+["cohort"]].apply(lambda x: " - ".join(x), axis=1)
+        # drop index columns, leave just cohort (and year)
+        data.drop(index, axis=1, inplace=True)
+
+        print(path)
+        print(data)
+        print()
+
+        continue
 
         # insert data
         for index, row in data.iterrows():
@@ -188,7 +176,6 @@ for path in files:
 
 print(f"Success: {success}")
 print(f"No data found: {no_data}")
-print(f"No year found: {no_year}")
 print(f"No establishment found: {no_establishment}")
 
 conn.commit()
