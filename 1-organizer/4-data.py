@@ -140,33 +140,28 @@ for path in files:
     else:
         index_with_year = index
 
+    # if there is a single value_var we don't add its column name to the index_with_cohort
+    if(len(data.columns) - len(index_with_year) == 1):
+        index_with_cohort = index 
+    else:
+        index_with_cohort = index + ["cohort"]
+
     # melt dataframe for easy insertion
     data = pd.melt(data, id_vars=index_with_year, var_name="cohort", value_name="value")
     # fuse index columns
-    data["cohort"] = data[index+["cohort"]].apply(lambda x: " - ".join(x), axis=1)
+    data["cohort"] = data[index_with_cohort].apply(lambda x: " - ".join(x), axis=1)
     # drop index columns, leave just cohort (and year)
     data.drop(index, axis=1, inplace=True)
-
-    # print(path)
-    # print(data)
-    # print()
-
-    success += 1
-
-    continue
 
     # insert data
     for index, row in data.iterrows():
         try:
             year = row["year"]
-            cohort = row["cohort"]
-            value = row["value"]
         except:
-            print("Error extracting data")
-            print(path)
-            print(data)
-            print(stringTable)
-            exit()
+            year = None
+
+        cohort = row["cohort"]
+        value = row["value"]
 
         # insert data into db
         cursor.execute(
