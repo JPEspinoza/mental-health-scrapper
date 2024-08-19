@@ -1,6 +1,6 @@
 
 import pandas as pd
-import json
+import simdjson
 import sqlite3
 from glob import glob
 from clean import clean_string
@@ -9,20 +9,16 @@ import numpy as np
 # silence pandas warnings about the pivot
 pd.set_option('future.no_silent_downcasting', True)
 
-# prevent sqlite from getting garbage when inserting numpy int64
+# turn numpy int64 into int64 so that sqlite doesn't think its getting binary data
 sqlite3.register_adapter(np.int64, int)
 
 files = glob("../0-scrapper/responses/*.json")
 
-# files = (
-#     glob("../0-scrapper/responses/*-AttendanceByProfessional.json")[1], 
-#     glob("../0-scrapper/responses/*-AttendanceByAge.json")[0], 
-#     glob("../0-scrapper/responses/*-IngressDiagnosticSubstance.json")[0],
-# )
-
 # open sqlite database
 conn = sqlite3.connect("../data/db.sqlite3")
 cursor = conn.cursor()
+
+cursor.execute('DELETE FROM data')
 
 # counters
 success = 0
@@ -33,7 +29,7 @@ no_establishment = 0
 # load each file 
 for path in files:
     with open(path) as f:
-        response = json.load(f)
+        response = simdjson.load(f) # type: ignore
 
         # get column names
         variables = response["results"][0]["variables"]
@@ -108,11 +104,7 @@ for path in files:
         except:
             print(f"Establishment not found: {establishment}")
             no_establishment += 1
-            continue
-
-        # drop unneeded columns from different reports
-        data.drop(columns=["Tipo"], inplace=True, errors="ignore")
-        data.drop(columns=["Concepto"], inplace=True, errors="ignore")
+            pass
 
         # for reports with stringTables
         # this reports have a column with indexes that map to a stringTable
@@ -121,9 +113,15 @@ for path in files:
             stringTable = response["results"][0]["stringTable"]["valueList"]
         except:
             stringTable = None
+            pass
 
         if stringTable:
-            if("Profesional" in data.columns): 
+            value = None
+            if("Concepto" in data.columns):
+                column = "Concepto"
+            elif("ConsultationSpecialistByAge.json" in path):
+                column = "Especialidad"
+            elif("Profesional" in data.columns): 
                 column = "Profesional"
                 value = "Total_Ambos_sexos"
             elif("Diagnóstico/Factor de riesgo" in data.columns):
@@ -132,17 +130,15 @@ for path in files:
             elif("Mes" in data.columns):
                 column = "Mes"
                 value = "Frecuencia"
-            elif("ConsultationSpecialistByAge.json" in path):
-                # we can't handle the pivot for this report
-                # it indexes both to the age and the specialist
-                # we are going to ignore the specialist and use just the age
-                continue
             elif("Diagnóstico/Factor de Riesgo" in data.columns):
                 column = "Diagnóstico/Factor de Riesgo"
                 value = "Total"
             elif("Tipo de taller" in data.columns):
                 column = "Tipo de taller"
                 value = "Número de intervenciones"
+            elif("Especialidad" in data.columns):
+                column = "Especialidad"
+                value = "Total Ambos sexos"
             else:
                 print("Unknown pivot!")
                 print(path)
@@ -150,26 +146,43 @@ for path in files:
                 print(stringTable)
                 exit()
 
-            # map
             data[column] = data[column].map(lambda x: stringTable[x]) # type: ignore
 
-            # pivot to fit format of other reports
-            data = pd.pivot_table(data, index="year", columns=column, values=value, aggfunc='sum', fill_value=0)
-            data.reset_index(inplace=True)
+            print(column)
+            # rename value column
+            data.rename(columns={value: "value"}, inplace=True, errors="ignore")
+
+            # rename cohort
+            data.rename(columns={column: "cohort"}, inplace=True, errors="ignore")
+
+            # fill data
             data.replace("~N", 0, inplace=True)
+
+            if(value == None):
+                data = pd.melt(data, id_vars=["year", "cohort"], value_name="value")
+                data["cohort"] = data["cohort"] + " - " + data["variable"]
+                data.drop(columns=["variable"], inplace=True)
+        else:
+            data = pd.melt(data, id_vars=["year"], var_name="cohort", value_name="value")
 
         # insert data
         for index, row in data.iterrows():
-            # extract year
-            year = row["year"]
-            row = row.drop(labels=["year"])
+            try:
+                year = row["year"]
+                cohort = row["cohort"]
+                value = row["value"]
+            except:
+                print("Error extracting data")
+                print(path)
+                print(data)
+                print(stringTable)
+                exit()
 
-            for cohort, value in row.items():
-                # insert data into db
-                cursor.execute(
-                    "INSERT INTO data (establishment_id, report_id, commune_id, year, cohort, value) VALUES (?, ?, ?, ?, ?, ?)",
-                    (establishment_id, report_id, commune_id, year, cohort, value)
-                )
+            # insert data into db
+            cursor.execute(
+                "INSERT INTO data (establishment_id, report_id, commune_id, year, cohort, value) VALUES (?, ?, ?, ?, ?, ?)",
+                (establishment_id, report_id, commune_id, year, cohort, value)
+            )
 
         success += 1 
 
