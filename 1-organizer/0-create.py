@@ -1,8 +1,3 @@
-"""
-inserts the data into the database
-
-"""
-
 import sqlite3
 
 # connect to the database
@@ -42,19 +37,18 @@ cursor.execute("""
 """)
 
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS data (
-        id INTEGER PRIMARY KEY,
-        report_id INTEGER NOT NULL,
-        year INTEGER NOT NULL,
-        cohort TEXT NOT NULL,
-        value INTEGER NOT NULL,
-        commune_id INTEGER NOT NULL,
-        establishment_id INTEGER,
-        establishment TEXT NOT NULL,
-        FOREIGN KEY (report_id) REFERENCES report (id),
-        FOREIGN KEY (commune_id) REFERENCES commune (id),
-        FOREIGN KEY (establishment_id) REFERENCES establishment (id)
-    )
+create table data
+(
+    id               INTEGER            primary key,
+    year             INTEGER,
+    cohort           TEXT    not null,
+    value            INTEGER not null,
+    report_id        INTEGER not null   references report,
+    commune_id       INTEGER not null   references commune,
+    establishment_id INTEGER            references establishment,
+    constraint data_unique
+        unique (report_id, year, cohort, establishment_id, commune_id) on conflict replace
+);
 """)
 
 # commit the changes and close the connection

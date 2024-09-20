@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <p> Constructor de mapa </p>
+            <div class="form-floating mb-3">
+                <select class="form-select" id="province" name="province">
+                    <option value="null" disabled selected>Provincia</option>
+                    {% for province in provinces %}
+                    <option value="{{ province }}">{{ province }}</option>
+                    {% endfor %}
+                </select>
+                <label for="province">Provincia</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" disabled="disabled" id="report" name="report">
+                    <option value="null" disabled selected>Reporte</option>
+                </select>
+                <label for="report">Reporte</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" disabled="disabled" id="year" name="year">
+                    <option value="null" disabled selected>Año</option>
+                </select>
+                <label for="year">Año</label>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary w-100" id="submit">Construir mapa</button>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <div id="map" class="vh-100"> {{map|safe}} </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

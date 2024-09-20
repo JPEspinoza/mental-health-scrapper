@@ -1,0 +1,58 @@
+main: schema
+    + tables
+        commune: table
+            + columns
+                id: INTEGER
+                name: TEXT NN
+                geometry: BLOB NN
+                region: TEXT NN
+                province: TEXT NN
+                population: INT NN
+            + indices
+                commune_province_index: index (province)
+            + keys
+                #1: PK (id)
+        data: table
+            + columns
+                id: INTEGER
+                report_id: INTEGER NN
+                year: INTEGER
+                cohort: TEXT NN
+                value: INTEGER NN
+                establishment_id: INTEGER
+                commune_id: INT NN
+            + indices
+                #1: unique (report_id, year, cohort, establishment_id, commune_id)
+                data_report_id_index: index (report_id)
+                data_year_commune_id_index: index (year, commune_id)
+                data_year_index: index (year)
+                data_establishment_id_index: index (establishment_id)
+                data_commune_id_index: index (commune_id)
+            + keys
+                #1: PK (id)
+                data_unique: AK (report_id, year, cohort, establishment_id, commune_id) (underlying index #1) on conflict replace
+            + foreign-keys
+                #1: foreign key (report_id) -> report (id)
+                #2: foreign key (establishment_id) -> establishment (id)
+                #3: foreign key (commune_id) -> commune (id)
+        establishment: table
+            + columns
+                id: INTEGER
+                name: TEXT NN
+                address: TEXT NN
+                lat: REAL
+                lon: REAL
+                commune_id: INTEGER NN
+            + indices
+                establishment_commune_id_index: index (commune_id)
+            + keys
+                #1: PK (id)
+            + foreign-keys
+                #1: foreign key (commune_id) -> commune (id)
+        report: table
+            + columns
+                id: INTEGER
+                name: TEXT NN
+                description: TEXT
+            + keys
+                #1: PK (id)
