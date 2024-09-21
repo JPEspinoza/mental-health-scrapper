@@ -4,13 +4,13 @@ import geopandas
 import sqlite3
 import json
 from shapely import wkb
-from matplotlib import rcParams
+import folium
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
 # auto layout for graphs
-rcParams.update({'figure.autolayout': True})
+# rcParams.update({'figure.autolayout': True})
 
 # start database connection
 conn = sqlite3.connect("../data/db.sqlite3")
@@ -25,20 +25,31 @@ def map_home():
     """
     Generates the filter list and renders the map.html template
     """
-    provinces = cursor.execute("select distinct(province) from commune").fetchall()
+
+    # get list of provinces with data
+    cursor.execute("""
+    select province
+    from commune
+    join data on commune.id = data.commune_id
+    group by province
+    having sum(data.value) > 0
+    """)
+    provinces = cursor.fetchall()
     provinces = [provinces[0] for provinces in provinces]
 
     # generate preview map
-    map = cursor.execute("select geometry from commune where province like 'santiago';")
-
-    # format the data into a dataframe
+    map = cursor.execute("select geometry from commune where province = 'SANTIAGO'")
     dataframe = pandas.DataFrame(map, columns=['geometry'])
     dataframe['geometry'] = dataframe['geometry'].apply(wkb.loads) # type: ignore
     geodataframe = geopandas.GeoDataFrame(data=dataframe, geometry='geometry', crs='EPSG:3857') # type: ignore
- 
-    map = geodataframe.explore(cmap='OrRd', legend=True)._repr_html_()
 
-    return render_template("map.html", provinces=provinces, map=map)
+    figure = folium.Figure(width="100%", height="100%")
+    map = geodataframe.explore(cmap='OrRd', legend=True)
+    figure.add_child(map)
+
+    rendered_map = figure._repr_html_()
+
+    return render_template("map.html", provinces=provinces, map=rendered_map)
 
 @app.route("/map_index_reports/<province>/")
 def map_index_reports(province):
@@ -48,7 +59,9 @@ def map_index_reports(province):
     from report
     join data on data.report_id = report.id
     join commune on commune.id = data.commune_id
-    where commune.province = ?
+    where 
+        commune.province = ? AND
+        data.year is not null
     group by report.id
     having sum(data.value) > 0;
     """, (province,))
@@ -67,7 +80,8 @@ def map_index_years(province, report):
     join report on data.report_id = report.id
     where
         commune.province = ? AND
-        report.name = ?
+        report.name = ? AND
+        data.year is not null
     group by year
     having sum(data.value) > 0;
     """, (province, report,))
@@ -103,7 +117,8 @@ def map(report, year, province):
     geodataframe = geopandas.GeoDataFrame(data=dataframe, geometry='geometry', crs='EPSG:3857') # type: ignore
 
     # create the heatmap into a folium map
+    figure = folium.Figure(width="100%", height="100%")
     map = geodataframe.explore(column='count', cmap='OrRd', legend=True)
+    figure.add_child(map)
 
-    # return the map as html
-    return map._repr_html_() 
+    return figure._repr_html_()
