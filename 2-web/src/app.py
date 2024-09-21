@@ -7,13 +7,9 @@ from shapely import wkb
 import folium
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
-
-# auto layout for graphs
-# rcParams.update({'figure.autolayout': True})
 
 # start database connection
-conn = sqlite3.connect("../data/db.sqlite3")
+conn = sqlite3.connect("db.sqlite3")
 cursor = conn.cursor()
 
 @app.route("/")
