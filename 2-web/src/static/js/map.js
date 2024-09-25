@@ -81,6 +81,8 @@ submit.addEventListener('click', function() {
     let report = document.getElementById('report').value;
     let year = document.getElementById('year').value;
 
+    submit.disabled = true;
+
     // make a request to the backend
     fetch(`/map/${province}/${report}/${year}/`)
     .then(response => response.text())
