@@ -5,7 +5,7 @@ Adds the establishments to the database
 import pandas as pd
 import re
 import sqlite3
-from clean import clean_string
+from lib.clean import clean_string
 from unidecode import unidecode
 
 conn = sqlite3.connect("../data/db.sqlite3")

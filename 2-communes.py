@@ -9,7 +9,7 @@ The geometry of the communes is serialized to well-known binary geometric repres
 import geopandas
 import sqlite3
 import pandas as pd
-from clean import clean_string
+from lib.clean import clean_string
 from unidecode import unidecode
 
 geopandas.options.io_engine = "pyogrio"

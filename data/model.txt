@@ -53,6 +53,7 @@ main: schema
             + columns
                 id: INTEGER
                 name: TEXT NN
-                description: TEXT
+                description: text
+                reportname: text
             + keys
                 #1: PK (id)

@@ -3,7 +3,7 @@ import pandas as pd
 import simdjson
 import sqlite3
 from glob import glob
-from clean import clean_string
+from lib.clean import clean_string
 import numpy as np
 
 # silence pandas warnings about the pivot

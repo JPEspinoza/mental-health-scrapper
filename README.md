@@ -12,15 +12,25 @@ This repository contains 3 different projects to scrape, organize and then explo
     - reporteria salud mental: https://informesdeis.minsal.cl/SASVisualAnalytics/?reportUri=/reports/reports/ad0c03ad-ee7a-4da4-bcc7-73d6e12920cf&sso_guest=true&reportViewOnly=true&reportContextBar=false&sas-welcome=false
     
 # Projects
-## 0-scraper
-This is a fork of this scrapper https://github.com/juancri/covid19-vaccination, modified to scrape the desired reports
 
-Check the readme to learn how to use it and how to scrape more reports
+This project consists of multiple scripts that scrape and process the data from DEIS
 
-## 1-organizer
-The organizer is a bunch of python scripts that load the data from the scraper and insert it into an sqlite database.
+All the scripts must be run sequentially in the order they are numbered
 
-The organizer also inserts the establishment and commune data, trying its best to match the reports with the establishment data. The communes are always matched.
+## Running
+From this folder, in a unix shell
+```
+# create a virtual environment
+python3 -m venv venv 
 
-## 2-web
-The web is a flask app that serves the data from the sqlite database. It can be used to explore the data and to create visualizations.
+# load the virtual environment
+source venv/bin/activate
+
+# install the requirements
+pip install -r requirements.txt
+
+# run the scripts sequentially
+python 0-scrape.py
+python 1-initdb.py
+...
+```

@@ -1,11 +1,11 @@
 import requests
-from communes import communes
+from lib.communes import communes
 import os
 import json
 import uuid
 
-xCsrfToken = "a73e8ca9-7d5e-4257-8707-199ed2949be5"
-jSessionID = "396311275756F6F09B52CC002A2B5E37.report-data-172-16-1-254"
+xCsrfToken = "151a5c34-d3a7-4374-b0aa-a12b6be6cdfa"
+jSessionID = "8DF22D279B882FD34BC7395F0C381630.report-data-192-168-173-202"
 
 # load the payloads
 print("loading payloads")

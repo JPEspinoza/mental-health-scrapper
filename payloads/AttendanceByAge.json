@@ -1,26 +1,88 @@
 {
+    "description": "Corresponde a la Intervención ambulatoria individual o grupal, realizada por un profesional, técnico y/o gestor comunitario. La intervención incluye consejería, evaluación y confirmación diagnóstica, elaboración de plan de cuidados integrales, psicoeducación, acciones de emergencia y desastres, entre otras prestaciones. Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describe los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes. Fuente: REMA 06",
+    "reportname": "",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
-    "nextUniqueNameIndex": 35705,
+    "nextUniqueNameIndex": 35325,
     "dataDefinitions": [
         {
             "@element": "ParentDataDefinition",
-            "name": "dd24418",
+            "name": "dd3685",
             "businessItems": [
                 {
-                    "name": "bi24626",
-                    "base": "bi24569",
+                    "name": "bi3681",
+                    "base": "bi605",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3680",
+                    "base": "bi629",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3684",
+                    "expression": {
+                        "@element": "Expression",
+                        "value": "or(in(${bi3680,binned},'Atención Asistente Social','Atención Enfermera/o','Atención Enfermera/o(ED)','Atención Gestor Comunitario(ED)','Atención Gestor/a Comunitario','Atención Intervención Psicosocial Grupal','Atención Matrona/ón','Atención Médico','Atención Otros Profesionales','Atención Psicodiagnóstico Psicólogo/a','Atención Psicólogo/a','Atención Psicólogo/a(ED)','Atención Psicoterapia Individual Médico Psiquiatra','Atención Psicoterapia Individual Psicólogo/a','Atencion Técnico Paramédico en Salud Mental','Atención Técnico Paramédico y En Salud Mental(ED)','Atención Técnico Rehabilitación Alcohol Y Drogas','Atención Terapeuta Ocupacional'),ismissing(${bi3680,binned}))"
+                    },
+                    "editorProperties": [
+                        {
+                            "@element": "Editor_Property",
+                            "key": "complexity",
+                            "value": "SINGLE_DATA_ITEM"
+                        },
+                        {
+                            "@element": "Editor_Property",
+                            "key": "interactiveEditingAllowed",
+                            "value": "TRUE"
+                        }
+                    ],
+                    "@element": "RelationalFilterItem"
+                },
+                {
+                    "name": "bi3777",
+                    "base": "bi916",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3778",
+                    "base": "bi917",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3779",
+                    "base": "bi918",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3780",
+                    "base": "bi919",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3781",
+                    "base": "bi920",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3782",
+                    "base": "bi921",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi3783",
+                    "base": "bi922",
                     "@element": "RelationalDataItem"
                 }
             ],
-            "source": "ds24544",
+            "source": "ds604",
             "childQueryRelationshipType": "independent",
             "dataDefinitionList": [
                 {
                     "@element": "DataDefinition",
-                    "name": "dd24419",
-                    "type": "relational",
-                    "relationalQueryList": [
+                    "name": "dd3686",
+                    "type": "multidimensional",
+                    "multidimensionalQueryList": [
                         {
                             "detail": false,
                             "axes": [
@@ -28,66 +90,134 @@
                                     "@element": "Query_Axis",
                                     "type": "column",
                                     "itemList": [
-                                        "bi24626"
+                                        "bi3681"
+                                    ]
+                                },
+                                {
+                                    "@element": "Query_Axis",
+                                    "type": "row",
+                                    "itemList": [
+                                        "bi3777",
+                                        "bi3778",
+                                        "bi3779",
+                                        "bi3780",
+                                        "bi3781",
+                                        "bi3782",
+                                        "bi3783"
                                     ]
                                 }
                             ],
-                            "@element": "RelationalQuery"
+                            "@element": "MultidimensionalQuery",
+                            "columnSortItems": [
+                                {
+                                    "sortDirection": "ascending",
+                                    "@element": "SortItem",
+                                    "reference": "bi3681"
+                                }
+                            ]
                         }
                     ],
-                    "source": "ds24544",
+                    "source": "ds604",
                     "resultDefinitions": [
                         {
                             "@element": "ResultDefinition",
-                            "name": "dd24417",
-                            "purpose": "primary"
+                            "name": "dd3679",
+                            "purpose": "primary",
+                            "maxRowsBehavior": "truncate",
+                            "maxRowsLookup": "graphDefault"
                         }
                     ]
                 }
-            ]
+            ],
+            "appliedFilters": {
+                "@element": "AppliedFilters",
+                "detailFilters": [
+                    "bi3684"
+                ]
+            }
         }
     ],
     "dataSources": [
         {
             "@element": "DataSource",
-            "name": "ds24544",
-            "label": "URGENCIASADU",
+            "name": "ds604",
+            "label": "REM_ATENCIONSM",
             "type": "relational",
             "casResource": {
                 "@element": "CasResource",
                 "server": "cas-shared-default",
                 "library": "Public",
-                "table": "URGENCIASADU",
+                "table": "REM_ATENCIONSM",
                 "locale": "es_419"
             },
             "businessItemFolder": {
                 "@element": "BusinessItemFolder",
                 "items": [
                     {
-                        "name": "bi24569",
-                        "label": "Frecuencia",
-                        "usage": "quantitative",
-                        "format": "COMMA12.",
-                        "@element": "DataSource_PredefinedDataItem",
-                        "calculation": "totalCount"
-                    },
-                    {
-                        "name": "bi24545",
+                        "name": "bi605",
                         "label": "Año",
                         "usage": "categorical",
-                        "xref": "año",
+                        "xref": "Ano",
                         "@element": "DataItem"
                     },
                     {
-                        "name": "bi24549",
-                        "label": "Comuna",
-                        "xref": "COMUNA",
+                        "name": "bi629",
+                        "xref": "Prestación",
                         "@element": "DataItem"
                     },
                     {
-                        "name": "bi25877",
-                        "label": "Nombre Establecimiento",
-                        "xref": "Nombre_estab",
+                        "name": "bi916",
+                        "label": "0 a 9 años",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_0a9años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi917",
+                        "label": "10 a 14 años",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_10a14años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi918",
+                        "label": "15 a 19 años",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_15a19años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi919",
+                        "label": "20 a 29 años",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_20a29años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi920",
+                        "label": "30 a 44 años",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_30a44años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi921",
+                        "label": "45 a 59 años",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_45a59años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi922",
+                        "label": "60 años  y más",
+                        "format": "COMMA12.",
+                        "xref": "Ambos_60ymasaños",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi628",
+                        "label": "Establecimiento",
+                        "xref": "Nombre Oficial",
                         "@element": "DataItem"
                     }
                 ]
@@ -3598,53 +3728,6 @@
                     "value": " Magallanes y  La Antártica Chilena"
                 }
             ]
-        },
-        {
-            "@element": "CustomSort",
-            "name": "cs35461",
-            "type": "string",
-            "valueList": [
-                {
-                    "@element": "Sort_Value",
-                    "value": "Niños/as con Control a los 18 meses"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "MCHAT realizado con alteración del area de lenguaje y/o Social en el control de los 18 meses"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "MCHAT alterado y  con alteración del area de lenguaje y/o Social en el control"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 1° parte-Riego Alto"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo Alto con derivación a especialista"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo medio"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 1° parte-Riego Bajo"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 2° Parte-Requiere derivación"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 2° Parte-Riesgo Medio en 1° parte"
-                },
-                {
-                    "@element": "Sort_Value",
-                    "value": "Resultado M-CHAT R/F 2° Parte-No requiere derivación"
-                }
-            ]
         }
     ],
     "sasReportState": {
@@ -3654,31 +3737,19 @@
             "queryRequests": [
                 {
                     "@element": "queryRequest",
-                    "data": "dd24418",
+                    "data": "dd3685",
                     "dataLevel": "custom",
                     "expressions": [
                         {
                             "@element": "expression",
                             "type": "filter",
                             "dataStage": "detail",
-                            "containedValue": "eq(${bi24545},2022)"
-                        },
-                        {
-                            "@element": "expression",
-                            "type": "filter",
-                            "dataStage": "detail",
-                            "containedValue": "eq(${bi24549},'La Reina')"
-                        },
-                        {
-                            "@element": "expression",
-                            "type": "filter",
-                            "dataStage": "detail",
-                            "containedValue": "eq(${bi25877},'SAPU La Reina')"
+                            "containedValue": "eq(${bi628},'{1}')"
                         }
                     ]
                 }
             ]
         },
-        "date": "2024-06-17T04:58:21.288Z"
+        "date": "2024-04-03T19:56:40.542Z"
     }
 }
