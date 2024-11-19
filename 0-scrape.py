@@ -1,11 +1,12 @@
 import requests
 from lib.communes import communes
 import os
-import json
+# import simdjson as json
+import json 
 import uuid
 
-xCsrfToken = "151a5c34-d3a7-4374-b0aa-a12b6be6cdfa"
-jSessionID = "8DF22D279B882FD34BC7395F0C381630.report-data-192-168-173-202"
+xCsrfToken = "7e600511-28a6-43db-9a3c-12c4b199c956"
+jSessionID = "9EC9DF0DEF019549D10A70953F651FA5.report-data-192-168-173-202"
 
 # load the payloads
 print("loading payloads")
@@ -13,11 +14,22 @@ class Report:
     def __init__(self, name: str, payload: str):
         self.name = name
         self.payload = payload
+
+        # rescue the metadata stored inside the payload
+        temp = json.loads(payload)
+        self.family = temp["_type"]
+        self.report = temp["_report"]
+        try:
+            self.misc = temp["_extra"]
+        except:
+            self.misc = None
+
 reports: list[Report] = []
 files = os.listdir("payloads/")
 for file in files:
     path = "payloads/" + file
     with open(path, "r") as f:
+        print(f"loading payload {file}")
         payload = f.read()
         reports.append(Report(file, payload))
 
@@ -76,6 +88,15 @@ for commune in communes:
             )
 
             content = json.loads(response.text)["results"]["content"]
+
+            content = json.loads(content)
+            content["establishment"] = establishment
+            content["commune"] = commune.name
+            content["report"] = report.report
+            content["family"] = report.family
+            content["misc"] = report.misc
+
+            content = json.dumps(content, ensure_ascii=False, indent=4)
 
             # save the report
             with open(path, "w") as f:

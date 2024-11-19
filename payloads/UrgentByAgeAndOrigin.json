@@ -1,0 +1,4108 @@
+{
+    "_type": "Corresponde al registro de patologías del ámbito de la Salud mental  en las Atenciones de urgencia.\nA partir del 1 de enero de 2021 se definió nuevas causas  en la plataforma de registro diario de Atenciones de Urgencia. Los nuevos registros son los siguientes:\n1. Traumatismos y Envenenamientos (Causas externas) Lesiones autoinfligidas intencionalmente: se registra todo paciente que llega a las unidades de Emergencia Hospitalaria y de Atención Primaria de la Red Asistencial de Salud, donde el médico da cuenta de Lesiones autoinfligidas intencionalmente. (CIE-10 X60-X84).\n2. Trastornos mentales y del comportamiento Total Causas de Trastornos Mentales: Corresponde al total atenciones cuya hipótesis diagnóstica principal sea identificada dentro de los Trastornos mentales y del comportamiento (CIE-10 F00-F99). Estas causas se desagregan de la siguiente manera: Ideación suicida  (CIE-10 R45.8), Trastornos mentales y del comportamiento debidos al uso de sustancias psicoactivas (CIE-10 F10-F19), Trastornos del Humor (Afectivos) (CIE-10 F30-F39), Trastornos neuróticos relacionados con el estrés y somatomorfos (CIE-10 F40-F48) incluido el trastorno de pánico (F41.0), Otros trastornos mentales no contenidos en las categorías anteriores.\n3. Hospitalización por causa: Se incorpora, además, las causas mentales y de lesiones autoinfligidas intencionalmente, en el desglose de hospitalizaciones por causa.\nFuente: Sistema Atenciones Diarias de Urgencia SADU",
+    "_report": "Total de Hospitalizaciones por Hipotesis diagnóstica de  Trastornos Mentales y del Comportamiento por Grupo de edad y Mes",
+    "@element": "SASReport",
+    "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
+    "nextUniqueNameIndex": 38048,
+    "dataDefinitions": [
+        {
+            "@element": "ParentDataDefinition",
+            "name": "dd24477",
+            "businessItems": [
+                {
+                    "name": "bi24597",
+                    "base": "bi24559",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi24599",
+                    "base": "bi24547",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi24600",
+                    "base": "bi24548",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi24601",
+                    "base": "bi24557",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi24602",
+                    "base": "bi24551",
+                    "@element": "RelationalDataItem"
+                },
+                {
+                    "name": "bi24603",
+                    "expression": {
+                        "@element": "Expression",
+                        "value": "in(${bi24602,binned},' - CAUSAS POR TRASTORNOS MENTALES (F00-F99)')"
+                    },
+                    "editorProperties": [
+                        {
+                            "@element": "Editor_Property",
+                            "key": "complexity",
+                            "value": "SINGLE_DATA_ITEM"
+                        },
+                        {
+                            "@element": "Editor_Property",
+                            "key": "interactiveEditingAllowed",
+                            "value": "TRUE"
+                        }
+                    ],
+                    "@element": "RelationalFilterItem"
+                }
+            ],
+            "source": "ds24544",
+            "childQueryRelationshipType": "independent",
+            "dataDefinitionList": [
+                {
+                    "@element": "DataDefinition",
+                    "name": "dd24478",
+                    "type": "multidimensional",
+                    "multidimensionalQueryList": [
+                        {
+                            "detail": false,
+                            "axes": [
+                                {
+                                    "@element": "Query_Axis",
+                                    "type": "column",
+                                    "itemList": [
+                                        "bi24597"
+                                    ]
+                                },
+                                {
+                                    "@element": "Query_Axis",
+                                    "type": "row",
+                                    "itemList": [
+                                        "bi24599",
+                                        "bi24600",
+                                        "bi24601"
+                                    ]
+                                }
+                            ],
+                            "@element": "MultidimensionalQuery",
+                            "columnSortItems": [
+                                {
+                                    "sortDirection": "ascending",
+                                    "@element": "SortItem",
+                                    "reference": "bi24597"
+                                }
+                            ]
+                        }
+                    ],
+                    "source": "ds24544",
+                    "resultDefinitions": [
+                        {
+                            "@element": "ResultDefinition",
+                            "name": "dd24471",
+                            "purpose": "primary",
+                            "maxRowsBehavior": "truncate",
+                            "maxRowsLookup": "graphDefault"
+                        }
+                    ]
+                }
+            ],
+            "appliedFilters": {
+                "@element": "AppliedFilters",
+                "detailFilters": [
+                    "bi24603"
+                ]
+            }
+        }
+    ],
+    "dataSources": [
+        {
+            "@element": "DataSource",
+            "name": "ds24544",
+            "label": "URGENCIASADU",
+            "type": "relational",
+            "casResource": {
+                "@element": "CasResource",
+                "server": "cas-shared-default",
+                "library": "Public",
+                "table": "URGENCIASADU",
+                "locale": "es_419"
+            },
+            "businessItemFolder": {
+                "@element": "BusinessItemFolder",
+                "items": [
+                    {
+                        "name": "bi24559",
+                        "label": "Mes",
+                        "sortOn": "custom",
+                        "xref": "Mes_Nombre",
+                        "customSort": "cs24581",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi24547",
+                        "label": "15 a 65 años",
+                        "format": "COMMA6.",
+                        "xref": "_15_64_años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi24548",
+                        "label": "65 años y más",
+                        "format": "COMMA6.",
+                        "xref": "_65_años_más",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi24557",
+                        "label": "Menores de 15 años",
+                        "format": "COMMA8.",
+                        "xref": "Menores_de_15_años",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi24551",
+                        "label": "Causa",
+                        "sortOn": "custom",
+                        "xref": "GLOSACAUSA",
+                        "customSort": "cs29199",
+                        "@element": "DataItem"
+                    },
+                    {
+                        "name": "bi25877",
+                        "label": "Nombre Establecimiento",
+                        "xref": "Nombre_estab",
+                        "@element": "DataItem"
+                    }
+                ]
+            }
+        }
+    ],
+    "customSorts": [
+        {
+            "@element": "CustomSort",
+            "name": "cs167",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs169",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs351",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs672",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs1279",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs1651",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs1652",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs2166",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs2259",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Hombre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mujer"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Indeterminado"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Desconocido"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs2283",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "0 a 4 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "5 a 9 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "10 a 14 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "15 a 19 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "20 a 24 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "30 a 34 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "25 a 29 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "35 a 39 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "40 a 44 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "45 a 49 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "50 a 54 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "55 a 59 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "60 a 64 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "65 a 69 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "70 a 74 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "75 a 79 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "80 y más años"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs2394",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Menor de 1 año"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "1 a 4 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "5 a 9 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "10 a 14 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "15 a 19 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "20 a 29 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "30 a 44 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "45 a 64 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "65 a 79 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "80 y más años"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs3395",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs3396",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs11944",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs12308",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Asistente Social"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Atenciones telefónicas de SM"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Atenciones telefónicas Médicas en Especialidad: Psiquiatría"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Controles de Especialidad resueltas en visitas domiciliarias: Psiquiatría"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enfermera/o"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Gestor Comunitario"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Matrona/on"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Médico"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Médico Psiquiatra"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mensajería de texto de SM"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Psicólogo/a"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Técnico Paramédico"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Técnico Rehabilitación Alcohol y Drogas"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Terapeuta Ocupacional"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Video llamadas de SM"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Otros Profesionales"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs17059",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs17977",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18468",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18470",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18522",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18524",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18686",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Aconcagua"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Aisén"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Araucanía Norte"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Araucanía Sur"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Arauco"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Arica"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Biobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Chiloé"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Concepción"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Del Libertador B.O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Del Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Del Reloncaví"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Iquique"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Magallanes"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitano Central"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitano Norte"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitano Occidente"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitano Oriente"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitano Sur"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitano Sur Oriente"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Osorno"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Talcahuano"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Valdivia"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Valparaíso San Antonio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Viña del Mar Quillota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " "
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "SEREMI Los Lagos"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18933",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs18935",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19115",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19117",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19183",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19186",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19188",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19254",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19257",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19259",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19321",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19328",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19330",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19402",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19404",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19480",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19482",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19545",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19547",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19633",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19635",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19687",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Ignorada"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs19898",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs24581",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs24723",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs29199",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Ideación Suicida (R45.8)"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Lesiones autoinfligidas intencionalmente (X60-X84)"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Trastornos del Humor (Afectivos) (F30-F39)"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Trastornos mentales y del comportamiento debidos al uso de sustancias psicoactivas (F10-F19)"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Trastornos neuróticos, trastornos relacionados con el estrés y trastornos somatomorfos (F40-F48) Incluído el trastorno de pánico (F41.0)"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Otros trastornos mentales no contenidos en las categorías anteriores"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "TOTAL CAUSAS DE TRASTORNOS MENTALES (F00-F99)"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " - CAUSAS POR TRASTORNOS MENTALES (F00-F99)"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs33604",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs33606",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs33865",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Hombre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mujer"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Intersex"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "9"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs34850",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs34853",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs35143",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs35461",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Niños/as con Control a los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT realizado con alteración del area de lenguaje y/o Social en el control de los 18 meses"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MCHAT alterado y  con alteración del area de lenguaje y/o Social en el control"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Alto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo Alto con derivación a especialista"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riesgo medio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 1° parte-Riego Bajo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Requiere derivación"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-Riesgo Medio en 1° parte"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Resultado M-CHAT R/F 2° Parte-No requiere derivación"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs36066",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Enero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Febrero"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Marzo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Abril"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mayo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Junio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Julio"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Agosto"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Septiembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Octubre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Noviembre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Diciembre"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs36068",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs37095",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": " Arica y Parinacota"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Tarapacá"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Antofagasta"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Atacama"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Coquimbo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Valparaíso"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Metropolitana  Santiago"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Libertador B. O'Higgins"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Maule"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Ñuble"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Bíobío"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " La Araucanía"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Ríos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Los Lagos"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Aisén Gral. C. Ibáñez Campo"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " Magallanes y  La Antártica Chilena"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Ignorada"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs37385",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "ACONCAGUA"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "AISÉN"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ANTOFAGASTA"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ARAUCANÍA NORTE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ARAUCANÍA SUR"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ARAUCO"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ARICA Y PARINACOTA"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ATACAMA"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "BÍOBÍO"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "CHILOÉ"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "CONCEPCIÓN"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "COQUIMBO"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "DEL MAULE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "DEL RELONCAVÍ"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "LIBERTADOR B. O'HIGGINS"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "LOS RÍOS"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MAGALLANES"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "METROPOLITANO CENTRAL"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "METROPOLITANO NORTE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "METROPOLITANO OCCIDENTE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "METROPOLITANO ORIENTE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "METROPOLITANO SUR"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "METROPOLITANO SURORIENTE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "ÑUBLE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "OSORNO"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "TALCAHUANO"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "TARAPACÁ"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "VALPARAÍSO SAN ANTONIO"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "VIÑA DEL MAR QUILLOTA"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": " "
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs37390",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Hombre"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Mujer"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Indeterminado"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "Desconocido"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs37398",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Menor de 1 año"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "1 a 4 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "5 a 9 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "10 a 14 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "15 a 19 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "20 a 29 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "30 a 44 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "45 a 64 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "65 a 79 años"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "80 y más años"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs37648",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "Todas las edades"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "5-9"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "10-14"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "15-19"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "20-24"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "25-29"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "30-34"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "35-39"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "40-44"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "45-49"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "50-54"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "55-59"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "60-64"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "65-69"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "69-74"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "75-79"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "80 y más"
+                }
+            ]
+        },
+        {
+            "@element": "CustomSort",
+            "name": "cs37649",
+            "type": "string",
+            "valueList": [
+                {
+                    "@element": "Sort_Value",
+                    "value": "TOTAL"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "HOMBRE"
+                },
+                {
+                    "@element": "Sort_Value",
+                    "value": "MUJER"
+                }
+            ]
+        }
+    ],
+    "sasReportState": {
+        "@element": "SASReportState",
+        "data": {
+            "@element": "Data_State",
+            "queryRequests": [
+                {
+                    "@element": "queryRequest",
+                    "data": "dd24477",
+                    "dataLevel": "custom",
+                    "expressions": [
+                        {
+                            "@element": "expression",
+                            "type": "filter",
+                            "dataStage": "detail",
+                            "containedValue": "eq(${bi25877},'{1}')"
+                        }
+                    ]
+                }
+            ]
+        },
+        "date": "2024-11-19T01:37:47.109Z"
+    }
+}
