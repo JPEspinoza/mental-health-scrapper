@@ -1,4 +1,6 @@
 {
+    "_type": "Ingresos al Programa de Salud Mental: Corresponde a las personas que se atienden por primera vez o reingresan a control en el Programa de Salud Mental. Si una persona presenta uno o más factores de riesgo, o uno o más diagnósticos, se considera como un solo ingreso a dicho programa y uno o mas ingresos a cada uno de los factores de riesgo y/o diagnósticos. Este registro no permite el análisis por comorbilidad, ni permite el análisis por persona. Fuente: REM A05",
+    "_report": "Ingresos al Programa de Salud Mental - Trastornos del Desarrollo",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,
