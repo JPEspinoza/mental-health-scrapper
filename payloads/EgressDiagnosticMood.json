@@ -1,4 +1,6 @@
 {
+    "_type": "Egresos del Programa de Salud Mental: Corresponde a las personas que egresan del Programa de Salud Mental luego que un profesional responsable da término a la modalidad de control de un paciente. Fuente: REM A05",
+    "_report": "Egresos Programa de Salud Mental - Trastornos del Humor (Afectivos)",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,
