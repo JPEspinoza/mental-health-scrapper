@@ -1,4 +1,6 @@
 {
+    "_type": "Test de Edimburgo: Corresponde a un test de evaluación que permiten identificar sintomatología depresiva en mujeres en etapa Pre y Post natal. Fuente: REM A03",
+    "_report": "Evaluaciones a Gestantes con Escala de Edimburgo según resultado",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,

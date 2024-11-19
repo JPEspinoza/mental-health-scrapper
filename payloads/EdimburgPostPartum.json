@@ -1,5 +1,6 @@
 {
-    "_comment0": "Test de Edimburgo: Corresponde a un test de evaluación que permiten identificar sintomatología depresiva en mujeres en etapa Pre y Post natal. M-CHAT: Instrumento que permite evaluar la Sospecha de Trastornos del Espectro Autista  (TEA) en Niños y niñas de 16 a 30 meses de edad. Sus criterios de aplicación, entre otros, considera una evaluación de desarrollo psicomotor (EEDP) con alteración de las áreas de Lenguaje y/o Social y derivación a especialidad cuando el diagnóstico del instrumento resulta alterado.",
+    "_type": "Test de Edimburgo: Corresponde a un test de evaluación que permiten identificar sintomatología depresiva en mujeres en etapa Pre y Post natal. Fuente: REM A03",
+    "_report": "Evaluaciones a Mujeres Post Parto con Escala de Edimburgo según resultado",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,

@@ -1,4 +1,6 @@
 {
+    "_type": "M-CHAT: Instrumento que permite evaluar la Sospecha de Trastornos del Espectro Autista  (TEA) en Niños y niñas de 16 a 30 meses de edad. Sus criterios de aplicación, entre otros, considera una evaluación de desarrollo psicomotor (EEDP) con alteración de las áreas de Lenguaje y/o Social y derivación a especialidad cuando el diagnóstico del instrumento resulta alterado. Fuente: REM A03",
+    "_report": "Aplicación Tamizaje Trastorno Espectro Autista (MCHAT) - Niños(as) con Control a los 18 meses según sexo",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,
