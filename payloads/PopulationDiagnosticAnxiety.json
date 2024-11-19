@@ -1,4 +1,7 @@
 {
+    "_type": "Población en Control APS y Especialidad: Corresponde a las personas que están en control en el nivel Primario y Secundario con Médico u otro Profesional, por factores de riesgo y condicionantes de Salud Mental y/o por Diagnósticos de Trastornos Mentales. Se considera población bajo control a todas las personas citadas para estos profesionales, hasta un plazo máximo de inasistencia de 45 días, a la fecha del corte (Corte Junio y Diciembre). Fuente: REM P06",
+    "_report": "Personas en control del Programa de Salud Mental  con diagnóstico de Trastornos Ansiosos",
+    "_extra": "Nota:  Esta sección considera  la distribución de la población en control con diagnósticos de salud mental y/o Factores condicionantes de la salud mental, sin embargo, es necesario considerar que una persona en control puede presentar una o más condiciones y diagnósticos, por lo que se sugiere  filtar por Diagnóstico o condición.",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,

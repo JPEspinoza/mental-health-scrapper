@@ -1,4 +1,6 @@
 {
+    "_type": "Población en Control APS y Especialidad: Corresponde a las personas que están en control en el nivel Primario y Secundario con Médico u otro Profesional, por factores de riesgo y condicionantes de Salud Mental y/o por Diagnósticos de Trastornos Mentales. Se considera población bajo control a todas las personas citadas para estos profesionales, hasta un plazo máximo de inasistencia de 45 días, a la fecha del corte (Corte Junio y Diciembre). Fuente: REM P06",
+    "_report": "Número de Personas en Control Programa de Salud Mental por grupo de edad",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,

@@ -1,4 +1,6 @@
 {
+    "_type": "La intervención individual por patrón de consumo se realiza a las personas que son detectadas con riesgo o problema de consumo de alcohol y otras sustancias. El riesgo se clasifica en Bajo, Intermedio o Alto. La detección del nivel de riesgo se descubre mediante la aplicación de instrumentos (AUDIT, ASSIST, CRAFFT) que realiza el profesional en cualquier atención de salud. Fuente: REM A27",
+    "_report": "Número de Participantes por grupo de edad",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35705,
