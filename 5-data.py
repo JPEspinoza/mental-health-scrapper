@@ -29,7 +29,7 @@ STRING_TABLE_INDEX = [
 ]
 
 # all
-files = glob("responses/*.json")
+files = glob("responses.old/*.json")
 
 # tests that have all reports with data
 # files = glob("../0-scrapper/responses/Estación Central-Centro de Salud Familiar Las Mercedes*.json")
@@ -43,6 +43,7 @@ cursor.execute('DELETE FROM data')
 # counters
 success = 0
 no_data = 0
+no_year = 0
 no_establishment = 0
 
 # load each file 
@@ -116,7 +117,7 @@ for path in files:
         cursor.execute("SELECT id FROM establishment WHERE name=?", (establishment,))
         establishment_id = cursor.fetchone()[0]
     except:
-        # print(f"Establishment not found: {establishment}")
+        print(f"Establishment not found: {establishment}")
         no_establishment += 1
         pass
 
@@ -158,7 +159,8 @@ for path in files:
         try:
             year = row["year"]
         except:
-            year = None
+            no_year += 1
+            continue
 
         cohort = row["cohort"]
         value = row["value"]
@@ -173,6 +175,7 @@ for path in files:
 
 print(f"Success: {success}")
 print(f"No data found: {no_data}")
+print(f"No year found: {no_year}")
 print(f"No establishment found: {no_establishment}")
 
 conn.commit()

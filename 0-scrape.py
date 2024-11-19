@@ -5,8 +5,8 @@ import os
 import json 
 import uuid
 
-xCsrfToken = "7e600511-28a6-43db-9a3c-12c4b199c956"
-jSessionID = "9EC9DF0DEF019549D10A70953F651FA5.report-data-192-168-173-202"
+xCsrfToken = "83b680f9-e183-479f-a91f-9d1926afd64f"
+jSessionID = "13357EE8A03CA527651A262611440326.report-data-192-168-173-202"
 
 # load the payloads
 print("loading payloads")

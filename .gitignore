@@ -6,9 +6,11 @@ data.json
 __pycache__/
 .vscode/
 .idea/
-responses/
-responses2/
 temp.json
 db.sqlite3
 log
+responses/
+responses2/
 responses copy/
+responses.old/
+data.csv
