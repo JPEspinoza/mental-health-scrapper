@@ -1,5 +1,6 @@
 {
-    "_comment0": "En este apartado se identifican todas las atenciones realizadas por un médico general, o especialista (APS o Especialidad). Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describen los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes. Fuente: REM A04",
+    "_type": "En este apartado se identifican todas las atenciones realizadas por un médico general, o especialista (APS o Especialidad). Estas atenciones que se describen en este apartado, se analizan desde un punto de vista territorial a nivel nacional, región y Servicio de Salud. Además, se describen los resultados según sexo, grupo de edad y tipo de prestación (profesional/técnico) según año y mes. Fuente: REM A04",
+    "_report": "Consultas Médicas del Programa de Salud Mental por Grupo de edad",
     "@element": "SASReport",
     "xmlns": "http://www.sas.com/sasreportmodel/bird-4.2.4",
     "nextUniqueNameIndex": 35563,
