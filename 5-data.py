@@ -29,13 +29,13 @@ STRING_TABLE_INDEX = [
 ]
 
 # all
-files = glob("../0-scrapper/responses/*.json")
+files = glob("responses/*.json")
 
 # tests that have all reports with data
 # files = glob("../0-scrapper/responses/Estación Central-Centro de Salud Familiar Las Mercedes*.json")
 
 # open sqlite database
-conn = sqlite3.connect("../data/db.sqlite3")
+conn = sqlite3.connect("db.sqlite3")
 cursor = conn.cursor()
 
 cursor.execute('DELETE FROM data')

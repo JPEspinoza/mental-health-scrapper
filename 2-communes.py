@@ -14,14 +14,14 @@ from unidecode import unidecode
 
 geopandas.options.io_engine = "pyogrio"
 
-communes = geopandas.read_file('../data/communes/geometry/comunas.shp')
+communes = geopandas.read_file('data/communes/geometry/comunas.shp')
 communes["wkb"] = communes.geometry.to_wkb()
 communes["Comuna"] = communes["Comuna"].apply(clean_string)
 communes["Provincia"] = communes["Provincia"].apply(clean_string)
 communes["Region"] = communes["Region"].apply(clean_string)
 
 # save in sqlite database
-conn = sqlite3.connect("../data/db.sqlite3")
+conn = sqlite3.connect("db.sqlite3")
 cursor = conn.cursor()
 
 # wipe db
@@ -47,10 +47,11 @@ for comuna in communes.iterrows():
     province = unidecode(comuna[1]['Provincia'])
     geometry = comuna[1]['wkb']
 
+    print(name)
     cursor.execute('INSERT INTO commune (name, geometry, region, province, population) VALUES (?, ?, ?, ?, 0)', (name, geometry, region, province))
 
 # format population csv
-population = pd.read_csv("../data/communes/population/pop.csv", sep=";")
+population = pd.read_csv("data/communes/population/pop.csv", sep=";")
 population = pd.DataFrame(population.values[1:], columns=population.iloc[0]) # remove first row
 population = population[population["NOMBRE COMUNA"] != 'PAÍS'] # remove country row
 population = population[population.Edad == 'Total Comunal'] # only select total population

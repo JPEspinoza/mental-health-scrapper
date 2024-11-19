@@ -8,7 +8,7 @@ import sqlite3
 from lib.clean import clean_string
 from unidecode import unidecode
 
-conn = sqlite3.connect("../data/db.sqlite3")
+conn = sqlite3.connect("db.sqlite3")
 cursor = conn.cursor()
 
 # wipe db
@@ -16,7 +16,7 @@ cursor.execute('DELETE FROM data')
 cursor.execute('DELETE FROM establishment')
 
 # load the file with the addresses
-addresses = pd.read_csv('../data/establishments/establishments.csv', sep=';', index_col=0)
+addresses = pd.read_csv('data/establishments/establishments.csv', sep=';', index_col=0)
 addresses = addresses[["Nombre Oficial", "Dirección", "Número", "Nombre Comuna", "Nombre Región", "LATITUD      [Grados decimales]", "LONGITUD [Grados decimales]"]]
 
 # clean 

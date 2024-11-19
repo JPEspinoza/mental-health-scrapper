@@ -4,23 +4,30 @@ import os
 import json
 import sqlite3
 
-reports = os.listdir("../0-scrapper/payloads/")
+reports = os.listdir("payloads/")
 
-conn = sqlite3.connect("../data/db.sqlite3")
+conn = sqlite3.connect("db.sqlite3")
 cursor = conn.cursor()
 
 cursor.execute('DELETE FROM data')
 cursor.execute('DELETE FROM report')
 
 for report in reports:
-    with open(f"../0-scrapper/payloads/{report}", "r") as f:
+    with open(f"payloads/{report}", "r") as f:
         payload = f.read()
         r = json.loads(payload)
         name = report.split(".")[0] # strip json
+
+        description = r["_report"]
+        category = r["_type"]
         try:
-            description = r["_comment0"]
+            misc = r["_extra"]
         except:
-            description = None
-        cursor.execute("INSERT INTO report (name, description) VALUES (?, ?)", (name, description))
+            misc = None
+
+        cursor.execute(
+            "INSERT INTO report (name, description, category, misc) VALUES (?, ?, ?, ?)", 
+            (name, description, category, misc)
+        )
 
 conn.commit()
