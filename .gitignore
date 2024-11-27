@@ -7,10 +7,10 @@ __pycache__/
 .vscode/
 .idea/
 temp.json
-db.sqlite3
+db.sqlite3*
 log
 responses/
 responses2/
 responses copy/
 responses.old/
-data.csv
+data.csv*

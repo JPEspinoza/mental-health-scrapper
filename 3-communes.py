@@ -29,17 +29,6 @@ cursor.execute('DELETE FROM data')
 cursor.execute('DELETE FROM establishment')
 cursor.execute('DELETE FROM commune')
 
-# remap names:
-# AYSEN -> AISEN
-# COYHAIQUE -> COIHAIQUE
-# PAIHUANO -> PAIGUANO
-# MARCHIGUE -> MARCHIHUE
-
-communes.loc[communes["Comuna"] == "Aysen", "Comuna"] = "Aisen"
-communes.loc[communes["Comuna"] == "Coyhaique", "Comuna"] = "Coihaique"
-communes.loc[communes["Comuna"] == "Paihuano", "Comuna"] = "Paiguano"
-communes.loc[communes["Comuna"] == "Marchigue", "Comuna"] = "Marchihue"
-
 # insert
 for comuna in communes.iterrows():
     name = clean_string(comuna[1]['Comuna'])
@@ -47,7 +36,6 @@ for comuna in communes.iterrows():
     province = unidecode(comuna[1]['Provincia'])
     geometry = comuna[1]['wkb']
 
-    print(name)
     cursor.execute('INSERT INTO commune (name, geometry, region, province, population) VALUES (?, ?, ?, ?, 0)', (name, geometry, region, province))
 
 # format population csv

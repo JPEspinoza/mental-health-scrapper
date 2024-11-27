@@ -43,6 +43,7 @@ for address in addresses.iterrows():
         longitude = None
 
     comuna = address[1]['Nombre Comuna']
+    print(comuna)
     cursor.execute('SELECT id FROM commune WHERE name LIKE ?', (comuna,))
     comuna_id = cursor.fetchone()
     comuna_id = comuna_id[0]

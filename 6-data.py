@@ -29,7 +29,7 @@ STRING_TABLE_INDEX = [
 ]
 
 # all
-files = glob("responses.old/*.json")
+files = glob("responses/*.json")
 
 # tests that have all reports with data
 # files = glob("../0-scrapper/responses/Estación Central-Centro de Salud Familiar Las Mercedes*.json")

@@ -15,6 +15,7 @@ CREATE TABLE commune (
     population INTEGER NOT NULL
 )
 """)
+cursor.execute("CREATE INDEX commune_province_index ON commune (province);")
 
 cursor.execute("""
 CREATE TABLE establishment (
@@ -27,6 +28,7 @@ CREATE TABLE establishment (
     FOREIGN KEY (commune_id) REFERENCES commune (id)
 )
 """)
+cursor.execute("CREATE INDEX establishment_commune_id_index ON establishment (commune_id);")
 
 cursor.execute("""
 CREATE TABLE report (
@@ -50,6 +52,13 @@ create table data
     establishment_id INTEGER    not null    references establishment
 )
 """)
+
+# indexes
+cursor.execute("CREATE INDEX data_report_id_index ON data (report_id);")
+cursor.execute("CREATE INDEX data_year_commune_id_index ON data (year, commune_id);")
+cursor.execute("CREATE INDEX data_year_index ON data (year);")
+cursor.execute("CREATE INDEX data_establishment_id_index ON data (establishment_id);")
+cursor.execute("CREATE INDEX data_commune_id_index ON data (commune_id);")
 
 # commit the changes and close the connection
 conn.commit()

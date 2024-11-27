@@ -1,15 +1,13 @@
 import requests
 from lib.communes import communes
 import os
-# import simdjson as json
 import json 
 import uuid
 
-xCsrfToken = "83b680f9-e183-479f-a91f-9d1926afd64f"
-jSessionID = "13357EE8A03CA527651A262611440326.report-data-192-168-173-202"
+xCsrfToken = "194d7bff-3cf2-451c-aec8-014b76bf585b"
+jSessionID = "00F57A9627E2B7BC28A5F15A6001CA2C.report-data-192-168-173-202"
 
 # load the payloads
-print("loading payloads")
 class Report:
     def __init__(self, name: str, payload: str):
         self.name = name
@@ -24,12 +22,12 @@ class Report:
         except:
             self.misc = None
 
+print("loading reports")
 reports: list[Report] = []
 files = os.listdir("payloads/")
 for file in files:
     path = "payloads/" + file
     with open(path, "r") as f:
-        print(f"loading payload {file}")
         payload = f.read()
         reports.append(Report(file, payload))
 
@@ -51,14 +49,27 @@ print("scraping")
 sequence = 0
 unscraped = 0
 
+existing_responses = os.listdir("responses/")
+
 for commune in communes:
     for establishment in commune.establishments:
         for report in reports:
 
             # verify if the report already exists
-            path = "responses/" + str(commune.name) + "-" + str(establishment) + "-" + report.name
-            if os.path.exists(path):
-                continue
+            filename = str(commune.name) + "-" + str(establishment) + "-" + report.name
+            path = "responses/" + filename
+
+            # if we already scrapped this check if it failed
+            if(filename in existing_responses):
+                f = open(path)
+                data = json.load(f)
+
+                if data["results"][0]["status"] == "failure":
+                    # go ahead and download again
+                    pass
+                else:
+                    # if it downloaded correctly skip it
+                    continue
 
             sequence += 1
 
@@ -86,10 +97,12 @@ for commune in communes:
                 },
                 json = payload,
             )
-
             content = json.loads(response.text)["results"]["content"]
-
             content = json.loads(content)
+
+            if(content["results"][0]["status"] == "failure"):
+                raise Exception("failed to download " + path)
+
             content["establishment"] = establishment
             content["commune"] = commune.name
             content["report"] = report.report
@@ -103,6 +116,7 @@ for commune in communes:
                 f.write(content)
             
             print(f"{path} saved successfully")
+
 
 print("scrapping done")
 print("unscraped reports: " + str(unscraped))
